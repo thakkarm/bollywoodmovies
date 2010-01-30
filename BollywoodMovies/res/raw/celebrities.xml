@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Celebrities>
+<!-- CelebrityEntry -->
+<CelebrityEntry>
+<Name>Aishwarya Rai</Name>
+<Catagory>Actress</Catagory>
+<NumOfPics>5</NumOfPics>
+</CelebrityEntry>
+<!-- CelebrityEntry -->
+<CelebrityEntry>
+<Name>Kareena Kapoor</Name>
+<Catagory>Actress</Catagory>
+<NumOfPics>5</NumOfPics>
+</CelebrityEntry>
+<!-- CelebrityEntry -->
+<CelebrityEntry>
+<Name>Priyanka Chopra</Name>
+<Catagory>Actress</Catagory>
+<NumOfPics>5</NumOfPics>
+</CelebrityEntry>
+</Celebrities>
