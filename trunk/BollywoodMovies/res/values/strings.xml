@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bollywood Movies</string>
+    <string name="appTitle">Hello, From Bollywood!</string>
+    <string name="newsActivityLabel">News</string>
+    <string name="photoGalleryActivityLabel">Photo Gallery</string>
+    <string name="menuActivityLabel">Menu</string>
+    <string name="aboutUsActivityLabel">About Us</string>
+</resources>

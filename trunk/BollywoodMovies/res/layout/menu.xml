@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <!-- Below can be put in the above to set the backgroud of the application -->
+    <!-- android:background="@drawable/logo" -->
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/menuActivityLabel"
+    />
+<ImageView android:id="@+id/LogoView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/logo"></ImageView>
+
+
+<LinearLayout android:id="@+id/LinearLayoutFooter" android:layout_width="wrap_content" android:layout_height="wrap_content">
+<Button android:text="@+id/ButtonAboutUs" android:id="@+id/ButtonAboutUs" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="@+id/ButtonPhotoGallery" android:id="@+id/ButtonPhotoGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="@+id/ButtonNews" android:id="@+id/ButtonNews" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+</LinearLayout>
+</LinearLayout>
