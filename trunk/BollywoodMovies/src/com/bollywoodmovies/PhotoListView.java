@@ -41,11 +41,6 @@ public class PhotoListView extends ListActivity
 
 		super.onCreate(savedInstanceState);
 
-		// Create list of celebrities from array
-		// works setListAdapter(new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1,
-		// workds LIST_OF_PHOTOS));
-
 		Configuration config = Configuration.getInstance();
 		ArrayList<CelebrityData> listOfCelebrities = new ArrayList<CelebrityData>(config
 				.getCelebrities());
