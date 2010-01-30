@@ -78,10 +78,12 @@ public class MainApp
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
 				+ "::onCreateOptionsMenu()");
 
+		// TODO
 		// This menus are display when the menu button is clicked while app is running
 		menu.add("Menu 1");
-		menu.add(1, 1, MENU_1_ID, "Menu 4");
-		
+		menu.add("Menu 2");
+//		menu.add(1, 1, MENU_1_ID, "Menu 4");
+
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
 				+ "::onCreateOptionsMenu()");
 		return true;
