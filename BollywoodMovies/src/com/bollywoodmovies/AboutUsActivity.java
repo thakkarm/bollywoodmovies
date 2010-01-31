@@ -4,6 +4,9 @@ import com.util.CommonConstants;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,13 @@ public class AboutUsActivity extends BaseApplicationActivity
 
 	    //| Create and initialize the footer buttons
 	    createFooterNavigationButton();
+
+	    //| Get button from layout
+	    Button sendEmailGalleryButton = (Button)findViewById(R.id.ButtonEmail);
+	    sendEmailGalleryButton.setText("Email Us");
+
+		// | Register the onClick listener with the implementation above
+	    sendEmailGalleryButton.setOnClickListener(sendEmailClickListner);
 
 	    // TODO
 	    // Add email address, search online on how to send email from app
@@ -52,4 +62,16 @@ public class AboutUsActivity extends BaseApplicationActivity
 				+ "::onStart()");
 	}
 	
+	OnClickListener sendEmailClickListner = new OnClickListener() {
+		public void onClick(View view) {
+			Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + AboutUsActivity.class
+					+ "::sendEmailClickListner()");
+
+		    MainApp.getInstance().sendEmail();
+		    
+			Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT
+					+ AboutUsActivity.class + "::sendEmailClickListner()");
+		}
+	};
+
 }
