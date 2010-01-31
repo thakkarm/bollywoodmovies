@@ -1,8 +1,26 @@
+/*******************************************************************************
+ * CLASS:
+ * 
+ * DESCRIPTION:
+ * 
+ * NOTES:
+ * 
+ ******************************************************************************/
+
+/*******************************************************************************
+ * 
+ * $Revision:$
+ * $LastChangedBy:$
+ * $Date:$
+ * $Id:$
+ * 
+ ******************************************************************************/
 package com.bollywoodmovies;
 
 import java.io.InputStream;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
@@ -12,77 +30,69 @@ import com.bollywoodmovies.listeners.NewsButtonListener;
 import com.bollywoodmovies.listeners.PhotoGalleryButtonListener;
 import com.util.CommonConstants;
 
-public class MainApp
-{
-	//| -----------------------------------------------------------------------
-	//| Public Operations
-	//| -----------------------------------------------------------------------
-	public static MainApp getInstance()
-	{
-		if (null == instance)
-		{
+public class MainApp {
+	// | -----------------------------------------------------------------------
+	// | Public Operations
+	// | -----------------------------------------------------------------------
+	public static MainApp getInstance() {
+		if (null == instance) {
 			// Create the one and only instance of the object
 			instance = new MainApp();
 		}
 		return instance;
 	}
 
-	public String getURLBollywoodActress(String nameOfPerson)
-	{
+	public String getURLBollywoodActress(String nameOfPerson) {
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
 				+ "::getURLBollywoodActress()");
 
 		// | Covert the selected item to lowercase and replace spaces with _
 		String personNameLowerCase = nameOfPerson.toLowerCase();
-		String personNameLowerCaseWithUnderscores = personNameLowerCase.replace(" ", "_");
+		String personNameLowerCaseWithUnderscores = personNameLowerCase
+				.replace(" ", "_");
 		Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
 				+ personNameLowerCaseWithUnderscores + " ]");
-		Log.d(CommonConstants.LOG_TAG, "Num : [ "
-				+ mCurrentPersonIndex + " ]");
+		Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentPersonIndex + " ]");
 
 		String url = PIC_URL.toString();
-		url = url.replaceAll(TAG_DIR_PERSON_NAME, personNameLowerCaseWithUnderscores);
+		url = url.replaceAll(TAG_DIR_PERSON_NAME,
+				personNameLowerCaseWithUnderscores);
 		String num = CommonConstants.EMPTY_STRING;
-		if (mCurrentPersonIndex < 10)
-		{
-			num = "0" + Long.toString(mCurrentPersonIndex);			
-		}
-		else 
-		{
-			num = Long.toString(mCurrentPersonIndex);			
+		if (mCurrentPersonIndex < 10) {
+			num = "0" + Long.toString(mCurrentPersonIndex);
+		} else {
+			num = Long.toString(mCurrentPersonIndex);
 		}
 		url = url.replaceAll(TAG_PERSON_NAME_ID, num);
-		
-		Log.d(CommonConstants.LOG_TAG, "URL : [ "
-				+ url + " ]");
+
+		Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");
 
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
 				+ "::getURLBollywoodActress()");
 		return url;
 	}
 
-	public void handleException(Exception exception)
-	{
+	public void handleException(Exception exception) {
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
 				+ "::handleException()");
-		
-		//TODO
+
+		// TODO
 		// Add popup that application error, try again...
-		
+
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
 				+ "::handleException()");
 	}
-	
-	public boolean createOptionMenu(Menu menu)
-	{
+
+	public boolean createOptionMenu(Menu menu) {
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
 				+ "::onCreateOptionsMenu()");
 
 		// TODO
-		// This menus are display when the menu button is clicked while app is running
+		// This menus are display when the menu button is clicked while app is
+		// running
 		menu.add("Menu 1");
 		menu.add("Menu 2");
-//		menu.add(1, 1, MENU_1_ID, "Menu 4");
+		// menu.add(1, 1, MENU_1_ID, "Menu 4");
 
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
 				+ "::onCreateOptionsMenu()");
@@ -90,59 +100,55 @@ public class MainApp
 	}
 
 	/**
-	 * @param mSplashActivity the mSplashActivity to set
+	 * @param mSplashActivity
+	 *            the mSplashActivity to set
 	 */
-	public void setSplashActivity(SplashActivity mSplashActivity)
-	{
+	public void setSplashActivity(SplashActivity mSplashActivity) {
 		this.mSplashActivity = mSplashActivity;
 	}
 
 	/**
 	 * @return the mSplashActivity
 	 */
-	public SplashActivity getSplashActivity()
-	{
+	public SplashActivity getSplashActivity() {
 		return mSplashActivity;
 	}
 
 	/**
-	 * @param mMenuActivity the mMenuActivity to set
+	 * @param mMenuActivity
+	 *            the mMenuActivity to set
 	 */
-	public void setMenuActivity(MenuActivity mMenuActivity)
-	{
+	public void setMenuActivity(MenuActivity mMenuActivity) {
 		this.mMenuActivity = mMenuActivity;
 	}
 
 	/**
 	 * @return the mMenuActivity
 	 */
-	public MenuActivity getMenuActivity()
-	{
+	public MenuActivity getMenuActivity() {
 		return mMenuActivity;
 	}
 
 	/**
-	 * @param mPhotoGalleryActivity the mPhotoGalleryActivity to set
+	 * @param mPhotoGalleryActivity
+	 *            the mPhotoGalleryActivity to set
 	 */
-	public void setPhotoGalleryActivity(PhotoGalleryActivity mPhotoGalleryActivity)
-	{
+	public void setPhotoGalleryActivity(
+			PhotoGalleryActivity mPhotoGalleryActivity) {
 		this.mPhotoGalleryActivity = mPhotoGalleryActivity;
 	}
 
 	/**
 	 * @return the mPhotoGalleryActivity
 	 */
-	public PhotoGalleryActivity getPhotoGalleryActivity()
-	{
+	public PhotoGalleryActivity getPhotoGalleryActivity() {
 		return mPhotoGalleryActivity;
 	}
 
-
-	//| -----------------------------------------------------------------------
-	//| Private Class Operations
-	//| -----------------------------------------------------------------------
-	private MainApp()
-	{
+	// | -----------------------------------------------------------------------
+	// | Private Class Operations
+	// | -----------------------------------------------------------------------
+	private MainApp() {
 		mPhotoGalleryButtonListener = new PhotoGalleryButtonListener();
 		mAboutUsButtonListener = new AboutUsButtonListener();
 		mNewsButtonListener = new NewsButtonListener();
@@ -151,129 +157,143 @@ public class MainApp
 	/**
 	 * @return the mPhotoGalleryButtonListener
 	 */
-	public PhotoGalleryButtonListener getPhotoGalleryButtonListener()
-	{
+	public PhotoGalleryButtonListener getPhotoGalleryButtonListener() {
 		return mPhotoGalleryButtonListener;
 	}
 
 	/**
 	 * @return the mAboutUsButtonListener
 	 */
-	public AboutUsButtonListener getAboutUsButtonListener()
-	{
+	public AboutUsButtonListener getAboutUsButtonListener() {
 		return mAboutUsButtonListener;
 	}
 
 	/**
 	 * @return the mNewsButtonListener
 	 */
-	public NewsButtonListener getNewsButtonListener()
-	{
+	public NewsButtonListener getNewsButtonListener() {
 		return mNewsButtonListener;
 	}
 
 	/**
-	 * @param mNewsActivity the mNewsActivity to set
+	 * @param mNewsActivity
+	 *            the mNewsActivity to set
 	 */
-	public void setNewsActivity(NewsActivity mNewsActivity)
-	{
+	public void setNewsActivity(NewsActivity mNewsActivity) {
 		this.mNewsActivity = mNewsActivity;
 	}
 
 	/**
 	 * @return the mNewsActivity
 	 */
-	public NewsActivity getNewsActivity()
-	{
+	public NewsActivity getNewsActivity() {
 		return mNewsActivity;
 	}
 
 	/**
-	 * @param mAboutUsActivity the mAboutUsActivity to set
+	 * @param mAboutUsActivity
+	 *            the mAboutUsActivity to set
 	 */
-	public void setAboutUsActivity(AboutUsActivity mAboutUsActivity)
-	{
+	public void setAboutUsActivity(AboutUsActivity mAboutUsActivity) {
 		this.mAboutUsActivity = mAboutUsActivity;
 	}
 
 	/**
 	 * @return the mAboutUsActivity
 	 */
-	public AboutUsActivity getAboutUsActivity()
-	{
+	public AboutUsActivity getAboutUsActivity() {
 		return mAboutUsActivity;
 	}
 
 	/**
-	 * @param mCurrentPersonName the mCurrentPersonName to set
+	 * @param mCurrentPersonName
+	 *            the mCurrentPersonName to set
 	 */
-	public void setCurrentPersonName(String currentPersonName)
-	{
+	public void setCurrentPersonName(String currentPersonName) {
 		this.mCurrentPersonName = currentPersonName;
 	}
 
 	/**
 	 * @return the mCurrentPersonName
 	 */
-	public String getCurrentPersonName()
-	{
+	public String getCurrentPersonName() {
 		return mCurrentPersonName;
 	}
 
 	/**
-	 * @param mCurrentPersonIndex the mCurrentPersonIndex to set
+	 * @param mCurrentPersonIndex
+	 *            the mCurrentPersonIndex to set
 	 */
-	public void setCurrentPersonIndex(long currentPersonIndex)
-	{
+	public void setCurrentPersonIndex(long currentPersonIndex) {
 		this.mCurrentPersonIndex = currentPersonIndex;
 	}
 
 	/**
 	 * @return the mCurrentPersonIndex
 	 */
-	public long getCurrentPersonIndex()
-	{
+	public long getCurrentPersonIndex() {
 		return mCurrentPersonIndex;
 	}
-	
-	public void init()
-	{
-		if (mInited == false)
-		{
-			//TODO
+
+	public void init() {
+		if (mInited == false) {
+			// TODO
 			// Check if HTTP or WiFi is available if not, popup error and exit
-			
+
 			// Get the local configuration file from the resource dir
-			//setLocalXml(getSplashActivity().getApplicationContext().getResources().openRawResource(R.raw.celebrities));			
+			// setLocalXml(getSplashActivity().getApplicationContext().getResources().openRawResource(R.raw.celebrities));
 
 			Configuration config = Configuration.getInstance();
 			config.loadCelebrityConfig();
 			mInited = true;
 		}
 	}
-	
+
 	/**
-	 * @param mLocalXml the mLocalXml to set
+	 * @param mLocalXml
+	 *            the mLocalXml to set
 	 */
-	public void setLocalXml(InputStream mLocalXml)
-	{
+	public void setLocalXml(InputStream mLocalXml) {
 		this.mLocalXml = mLocalXml;
 	}
 
 	/**
 	 * @return the mLocalXml
 	 */
-	public InputStream getLocalXml()
-	{
+	public InputStream getLocalXml() {
 		return mLocalXml;
 	}
 
-	//| -----------------------------------------------------------------------
-	//| Private Class Attributes
-	//| -----------------------------------------------------------------------
-	private static MainApp	instance = null;
+	/**
+	 * 
+	 * Method to send email
+	 */
 
-	private SplashActivity	mSplashActivity	= null;
+	protected void sendEmail() {
+
+		// Setup the recipient in a String array
+		String mailto = "info@bollywoodmovies.us";
+		String subject = "Suggestion";
+		String body = "user fillin";
+		
+		// Create a new Intent to send messages
+		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+
+		// Add attributes to the intent
+		sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
+		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, body);
+		sendIntent.setType("text/plain");
+
+		mAboutUsActivity.startActivity(Intent.createChooser(sendIntent, "SendEmail"));
+	}
+
+	// | -----------------------------------------------------------------------
+	// | Private Class Attributes
+	// | -----------------------------------------------------------------------
+	private static MainApp instance = null;
+
+	private SplashActivity mSplashActivity = null;
 	private AboutUsActivity mAboutUsActivity = null;
 	private NewsActivity mNewsActivity = null;
 	private MenuActivity mMenuActivity = null;
@@ -283,20 +303,20 @@ public class MainApp
 	private AboutUsButtonListener mAboutUsButtonListener = null;
 	private NewsButtonListener mNewsButtonListener = null;
 
-	static final String	BOLLYWOOD_MOVIES_URL	= "http://www.bollywoodmovies.us/";
+	static final String BOLLYWOOD_MOVIES_URL = "http://www.bollywoodmovies.us/";
 
 	private static int MENU_1_ID = 1;
-	
+
 	private InputStream mLocalXml = null;
-	
+
 	private String mCurrentPersonName = CommonConstants.EMPTY_STRING;
 	private long mCurrentPersonIndex = 0;
-	
+
 	private boolean mInited = false;
-	
+
 	static String TAG_DIR_PERSON_NAME = "TAG_DIR_PERSON_NAME";
 	static String TAG_PERSON_NAME_ID = "TAG_PERSON_NAME_ID";
-	
+
 	static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pics/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
 
 	// TODO
