@@ -12,5 +12,5 @@
     android:text="@string/appTitle"
     />
 <ImageView android:id="@+id/LogoView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/logo"></ImageView>
-<Button android:text="@+id/PhotoGallery" android:id="@+id/ButtonPhotoGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
 </LinearLayout>
