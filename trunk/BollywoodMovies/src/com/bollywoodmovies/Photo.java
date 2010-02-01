@@ -50,6 +50,19 @@ public class Photo extends BaseApplicationActivity {
 		createFooterNavigationButton();
 
 		// | Get button from layout
+		//Button testButton = (Button) findViewById(R.id.Button01);
+		//testButton.setText("P \nR \nE \nV");
+		//testButton.setLines(8);
+		//testButton.setWidth(40);
+
+		// | Get button from layout
+		//Button testButton = (Button) findViewById(R.id.ImageButton01);
+		//testButton.setText("P \nR \nE \nV");
+		//testButton.setLines(8);
+		//testButton.setWidth(40);
+		//testButton.setBackgroundResource(R.drawable.prev);
+		
+		// | Get button from layout
 		Button prevButton = (Button) findViewById(R.id.Prev);
 		prevButton.setText("Prev");
 
@@ -202,10 +215,10 @@ public class Photo extends BaseApplicationActivity {
 		// Log.d(CommonConstants.LOG_TAG, "Height " + height + "   width " +
 		// width);
 
-		imageView.setMaxHeight(300);
-		imageView.setMaxWidth(300);
-		imageView.setMinimumHeight(300);
-		imageView.setMinimumWidth(300);
+		imageView.setMaxHeight(250);
+		imageView.setMaxWidth(250);
+		imageView.setMinimumHeight(250);
+		imageView.setMinimumWidth(250);
 		imageView.setImageDrawable(image);
 
 	}
