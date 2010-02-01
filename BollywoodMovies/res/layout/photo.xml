@@ -8,10 +8,12 @@
 <Button android:text="@+id/Prev" android:id="@+id/Prev" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/Next" android:id="@+id/Next" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/MainMenu" android:id="@+id/MainMenu" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-</LinearLayout><ImageView android:id="@+id/PhotoImageView" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageView>
+</LinearLayout>
 
-
-
+<LinearLayout android:id="@+id/LinearLayout02" android:layout_width="wrap_content" android:layout_height="wrap_content">
+<ImageButton android:id="@+id/ImageButton01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/prev"></ImageButton>
+<ImageView android:id="@+id/PhotoImageView" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageView>
+</LinearLayout>
 
 <LinearLayout android:id="@+id/LinearLayoutFooter" android:layout_width="wrap_content" android:layout_height="wrap_content">
 
@@ -19,6 +21,8 @@
 <Button android:text="@+id/ButtonPhotoGallery" android:id="@+id/ButtonPhotoGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/ButtonNews" android:id="@+id/ButtonNews" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 </LinearLayout>
+
+
 
 
 </LinearLayout>
