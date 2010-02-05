@@ -22,6 +22,12 @@ import android.content.DialogInterface;
 public class Notes
 {
 
+	/************ 
+	 * Could update the images in pics to fixed size 230 x 230 using easy thumbnails app
+	 * to set 230 x 230 as streach to fit option,
+	 *************/
+	
+	
 	// RSS Feed Parser Example
 	// http://www.ibm.com/developerworks/opensource/library/x-android/index.html
 	// http://www.warriorpoint.com/blog/2009/07/19/android-simplified-source-code-for-parsing-and-working-with-xml-data-and-web-services-in-android/

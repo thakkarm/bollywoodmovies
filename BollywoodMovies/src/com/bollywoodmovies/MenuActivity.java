@@ -21,7 +21,10 @@ import com.util.CommonConstants;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MenuActivity extends BaseApplicationActivity
 {
@@ -44,6 +47,11 @@ public class MenuActivity extends BaseApplicationActivity
 
 	    //| Create and initialize the footer buttons
 	    createFooterNavigationButton();
+	    
+	    //| Get footer textview from layout
+	    TextView urlFooter = (TextView)findViewById(R.id.TextViewFooterUrl);
+	    //urlFooter.setGravity(RelativeLayout.CENTER_HORIZONTAL);
+	    urlFooter.setText("www.bollywoodmovies.us");
 	    
 	    Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MenuActivity.class + "::onCreate()");
 	}
@@ -72,9 +80,9 @@ public class MenuActivity extends BaseApplicationActivity
 
 		// Display the logo
 		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
-		//logoView.setMaxHeight(300);
-		//logoView.setMaxWidth(300);
-		//logoView.setAdjustViewBounds(true);
+		logoView.setMaxHeight(300);
+		logoView.setMaxWidth(300);
+		logoView.setAdjustViewBounds(true);
 		logoView.setImageResource(R.drawable.logo);
 
 		MainApp.getInstance().init();
