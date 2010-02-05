@@ -40,22 +40,28 @@ public class AboutUsActivity extends BaseApplicationActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.aboutus);
 
-	    MainApp.getInstance().setAboutUsActivity(this);
+		// Display the logo
+		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
+		logoView.setMinimumHeight(300);
+		logoView.setMinimumWidth(300);
+		logoView.setImageResource(R.drawable.appaboutus);
+
+		MainApp.getInstance().setAboutUsActivity(this);
 
 	    //| Create and initialize the footer buttons
 	    createFooterNavigationButton();
 
 	    //| Get button from layout
-	    Button sendEmailGalleryButton = (Button)findViewById(R.id.ButtonEmail);
-	    sendEmailGalleryButton.setText("Email Us");
+	    //Button sendEmailGalleryButton = (Button)findViewById(R.id.ButtonEmail);
+	    //sendEmailGalleryButton.setText("Email Us");
 
 		// | Register the onClick listener with the implementation above
-	    sendEmailGalleryButton.setOnClickListener(sendEmailClickListner);
+	    //sendEmailGalleryButton.setOnClickListener(sendEmailClickListner);
 
 	    // TODO
 	    // Add email address, search online on how to send email from app
 	    TextView aboutUsText = (TextView) findViewById(R.id.AboutUsText);
-	    aboutUsText.setText("If you have suggestion please email us at: ");
+	    aboutUsText.setText("If you have suggestion please email us at: info@bollywoodmovies.us");
 	    
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + AboutUsActivity.class + "::onCreate()");
 	}
@@ -67,12 +73,6 @@ public class AboutUsActivity extends BaseApplicationActivity
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + AboutUsActivity.class
 				+ "::onStart()");
 		super.onStart();
-
-		// Display the logo
-		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
-		logoView.setMinimumHeight(200);
-		logoView.setMinimumWidth(200);
-		logoView.setImageResource(R.drawable.appaboutus);
 
 		MainApp.getInstance().init();
 

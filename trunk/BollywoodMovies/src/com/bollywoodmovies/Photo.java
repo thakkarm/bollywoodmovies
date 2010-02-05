@@ -36,10 +36,13 @@ import android.view.View;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class Photo extends BaseApplicationActivity {
 
+	private static boolean SET_ADJUST_VIEW = true;
+	
 	public void onCreate(Bundle icicle) {
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
 				+ "::onCreateOptionsMenu()");
@@ -60,21 +63,38 @@ public class Photo extends BaseApplicationActivity {
 		//testButton.setText("P \nR \nE \nV");
 		//testButton.setLines(8);
 		//testButton.setWidth(40);
-		//testButton.setBackgroundResource(R.drawable.prev);
-		
-		// | Get button from layout
-		Button prevButton = (Button) findViewById(R.id.Prev);
-		prevButton.setText("Prev");
 
-		// | Register the onClick listener with the implementation above
+		// | Get button from layout
+		Button prevButton = (Button) findViewById(R.id.ButtonPrev);
+		//prevButton.setLines(8);
+		//prevButton.setWidth(33);
+		//prevButton.setText("P \nR \nE \nV");
+
+		prevButton.setWidth(150);
+		prevButton.setText("Prev");
 		prevButton.setOnClickListener(prevOnClickListner);
 
 		// | Get button from layout
-		Button nextButton = (Button) findViewById(R.id.Next);
+		Button nextButton = (Button) findViewById(R.id.ButtonNext);
+		//nextButton.setLines(8);
+		//nextButton.setWidth(33);
+		//nextButton.setText("N \nE \nX \nT");
+
+		nextButton.setWidth(150);
 		nextButton.setText("Next");
-
 		nextButton.setOnClickListener(nextOnClickListner);
+		// ***** This section works with regular buttons ****
 
+		
+		
+		/*
+		ImageButton prevButton = (ImageButton) findViewById(R.id.ButtonImagePrev);
+		prevButton.setOnClickListener(prevOnClickListner);
+
+		ImageButton nextButton = (ImageButton) findViewById(R.id.ButtonImageNext);
+		nextButton.setOnClickListener(nextOnClickListner);
+		*/
+		
 		mGestureDetector = new GestureDetector(this, new GestureListener());
 
 		String url = MainApp.getInstance().getURLBollywoodActress(
@@ -210,15 +230,31 @@ public class Photo extends BaseApplicationActivity {
 		Drawable image = ImageOperations(context, url);
 		imageView = (ImageView) findViewById(R.id.PhotoImageView);
 
-		// int height = image.getIntrinsicHeight();
-		// int width = image.getIntrinsicWidth();
-		// Log.d(CommonConstants.LOG_TAG, "Height " + height + "   width " +
-		// width);
+		int height = image.getIntrinsicHeight();
+		int width = image.getIntrinsicWidth();
+		Log.d(CommonConstants.LOG_TAG, "Height " + height + "   width " + width);
 
-		imageView.setMaxHeight(250);
-		imageView.setMaxWidth(250);
-		imageView.setMinimumHeight(250);
-		imageView.setMinimumWidth(250);
+		/*
+		 * http://developer.android.com/reference/android/widget/ImageView.html
+		 * An optional argument to supply a maximum height for this view. 
+		 * Only valid if setAdjustViewBounds(boolean) has been set to true. 
+		 * To set an image to be a maximum of 100 x 100 while preserving the 
+		 * original aspect ratio, do the following: 
+		 * 1) set adjustViewBounds to true 
+		 * 2) set maxWidth and maxHeight to 100 
+		 * 3) set the height and width layout params to WRAP_CONTENT. 
+		 * 
+		 * Note that this view could be still smaller than 100 x 100 using this 
+		 * approach if the original image is small. To set an image to a fixed size, 
+		 * specify that size in the layout params and then use setScaleType(ImageView.ScaleType) 
+		 * to determine how to fit the image within the bounds. 
+		 */
+		imageView.setAdjustViewBounds(SET_ADJUST_VIEW);
+		imageView.setMaxHeight(230);
+		imageView.setMaxWidth(230);
+		imageView.setMinimumHeight(200);
+		imageView.setMinimumWidth(200);
+	
 		imageView.setImageDrawable(image);
 
 	}
