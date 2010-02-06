@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,15 +18,19 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
 
 import android.util.Log;
 
 import com.bollywoodmovies.MainApp;
 import com.util.CommonConstants;
+import com.util.XMLFileLoaderException;
+import com.util.XmlFileLoader;
 
 public class Configuration
 {
-	static String	CONFIG_CELEBRITY	= "http://www.bollywoodmovies.us/android/app/bollywood/config/celebrities.xml";
+	static String CONFIG_CELEBRITY = "http://www.bollywoodmovies.us/android/app/bollywood/config/celebrities.xml";
+    static String CONFIG_NEWS = "http://www.bollywoodmovies.us/android/app/bollywood/config/news.xml";
 
 	// | -----------------------------------------------------------------------
 	// | Public Operations
@@ -42,6 +47,62 @@ public class Configuration
 
 	public void loadCelebrityConfig()
 	{
+		// | Create celebrity config file reader handler
+		CelebrityConfigHandler celebrityConfigHandler = new CelebrityConfigHandler();
+
+		XmlFileLoader xmlFileLoader = new XmlFileLoader();
+		
+		// | Load the configuration from the url
+		try
+        {
+            xmlFileLoader.loadXMLFromURL(CONFIG_CELEBRITY, celebrityConfigHandler);
+        } catch (XMLFileLoaderException e)
+        {
+            e.printStackTrace();
+            MainApp.getInstance().handleException(e);
+        }
+
+		// | Get the parsed data
+		mCelebrities = celebrityConfigHandler.getCelebrities();
+        Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
+        for (Iterator<CelebrityData> it = mCelebrities.iterator(); it.hasNext();)
+        {
+            CelebrityData celebrityData = (CelebrityData) it.next();
+            Log.i(CommonConstants.LOG_TAG, celebrityData.toString());
+        }
+        Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
+	}
+
+    public void loadNewsConfig()
+    {
+        // | Create celebrity config file reader handler
+        NewsConfigHandler newsConfigHandler = new NewsConfigHandler();
+
+        XmlFileLoader xmlFileLoader = new XmlFileLoader();
+        
+        // | Load the configuration from the url
+        try
+        {
+            xmlFileLoader.loadXMLFromURL(CONFIG_NEWS, newsConfigHandler);
+        } catch (XMLFileLoaderException e)
+        {
+            e.printStackTrace();
+            MainApp.getInstance().handleException(e);
+        }
+
+        // | Get the parsed data
+        mNews = newsConfigHandler.getNews();
+        Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
+        for (Iterator<NewsData> it = mNews.iterator(); it.hasNext();)
+        {
+            NewsData newsData = (NewsData) it.next();
+            Log.i(CommonConstants.LOG_TAG, newsData.toString());
+        }
+        Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
+    }
+
+	private void loadCelebrityConfigOldWorks()
+	{
 		URL url;
 		try
 		{
@@ -57,66 +118,63 @@ public class Configuration
 			CelebrityConfigHandler celebrityConfigHandler = new CelebrityConfigHandler();
 			xr.setContentHandler(celebrityConfigHandler);
 
-// Prints the configuration file
+			// Prints the configuration file
 			/*
-			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-			String strLine = CommonConstants.EMPTY_STRING;
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null)
+			 * BufferedReader br = new BufferedReader(new
+			 * InputStreamReader(url.openStream())); String strLine =
+			 * CommonConstants.EMPTY_STRING; // Read File Line By Line while
+			 * ((strLine = br.readLine()) != null) {
+			 * System.out.println(strLine); }
+			 */
+			/*
+			 * //| Load the local configuration InputSource inputSourceLocal =
+			 * new InputSource(MainApp.getInstance().getLocalXml()); // Parse
+			 * the xml-data from our URL xr.parse(inputSourceLocal);
+			 */
+
+			try
 			{
-				System.out.println(strLine);
-			}
-*/
-			/*
-			//| Load the local configuration
-			InputSource inputSourceLocal = new InputSource(MainApp.getInstance().getLocalXml());
-			// Parse the xml-data from our URL
-			xr.parse(inputSourceLocal);
-			*/
-			
-			try {
-				//| Load the online configuration
+				// | Load the online configuration
 				InputSource inputSource = new InputSource(url.openStream());
 
 				// Parse the xml-data from our URL
-				xr.parse(inputSource);				
-			}
-			catch (Exception e)
+				xr.parse(inputSource);
+			} catch (UnknownHostException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				MainApp.getInstance().handleException(e);				
+				MainApp.getInstance().handleException(e);
+			} catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				MainApp.getInstance().handleException(e);
 			}
 
 			// Provides the parsed data to us.
 			mCelebrities = celebrityConfigHandler.getCelebrities();
 
-		}
-		catch (MalformedURLException e)
+		} catch (MalformedURLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			MainApp.getInstance().handleException(e);
-		}
-		catch (ParserConfigurationException e)
+		} catch (ParserConfigurationException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			MainApp.getInstance().handleException(e);
-		}
-		catch (SAXException e)
+		} catch (SAXException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			MainApp.getInstance().handleException(e);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			MainApp.getInstance().handleException(e);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,15 +191,19 @@ public class Configuration
 	public CelebrityData getCelebrityData(String celebrityName)
 	{
 		CelebrityData foundCelebrityData = null;
-		ArrayList<CelebrityData> listOfCelebrities = new ArrayList<CelebrityData>(mCelebrities);
+		ArrayList<CelebrityData> listOfCelebrities = new ArrayList<CelebrityData>(
+				mCelebrities);
 
-		for (Iterator<CelebrityData> it = listOfCelebrities.iterator(); it.hasNext();)
+		for (Iterator<CelebrityData> it = listOfCelebrities.iterator(); it
+				.hasNext();)
 		{
 			CelebrityData celebrityData = (CelebrityData) it.next();
 			if (celebrityData.getName().equals(celebrityName))
 			{
 				foundCelebrityData = celebrityData;
-				Log.i(CommonConstants.LOG_TAG, "Found CelebrityData : ---------- \n" + celebrityData.toString());				
+				Log.i(CommonConstants.LOG_TAG,
+						"Found CelebrityData : ---------- \n"
+								+ celebrityData.toString());
 			}
 		}
 		return foundCelebrityData;
@@ -150,8 +212,9 @@ public class Configuration
 	// | -----------------------------------------------------------------------
 	// | Private Class Attributes
 	// | -----------------------------------------------------------------------
-	private static Configuration	instance	= null;
+	private static Configuration instance = null;
 
-	private List<CelebrityData>		mCelebrities;
+	private List<CelebrityData> mCelebrities = null;
+	private List<NewsData> mNews = null;
 
 }
