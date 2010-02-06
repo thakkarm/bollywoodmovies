@@ -20,6 +20,7 @@ package com.bollywoodmovies;
 import java.io.InputStream;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -76,8 +77,19 @@ public class MainApp {
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
 				+ "::handleException()");
 
+		
+		Log.e(CommonConstants.LOG_TAG, "-----------------------------------------------");
+		Log.e(CommonConstants.LOG_TAG, exception.toString());
+
 		// TODO
 		// Add popup that application error, try again...
+		// **** Current sending to About page but need to FIX.....
+        Context context = mSplashActivity.getApplicationContext();
+        Intent intent = new Intent(context, AboutUsActivity.class);
+        MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);            
+
+		Log.e(CommonConstants.LOG_TAG, "-----------------------------------------------");
+		
 
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
 				+ "::handleException()");
@@ -245,6 +257,7 @@ public class MainApp {
 
 			Configuration config = Configuration.getInstance();
 			config.loadCelebrityConfig();
+			config.loadNewsConfig();
 			mInited = true;
 		}
 	}
