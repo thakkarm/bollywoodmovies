@@ -33,21 +33,21 @@ public class CelebrityConfigHandler extends DefaultHandler
 		super.endElement(uri, localName, name);
 		if (this.mCurrentCelebrity != null)
 		{
-			if (localName.equalsIgnoreCase(CelebrityData.NAME))
+			if (localName.equalsIgnoreCase(CelebrityData.CELEBRITY_NAME))
 			{
 				String attrValue = mBuilder.toString();
 				attrValue = attrValue.replace('\n', ' ');
 				attrValue= attrValue.trim();
 				mCurrentCelebrity.setName(attrValue);
 			}
-			else if (localName.equalsIgnoreCase(CelebrityData.CATAGORY))
+			else if (localName.equalsIgnoreCase(CelebrityData.CELEBRITY_CATAGORY))
 			{
 				String attrValue = mBuilder.toString();
 				attrValue = attrValue.replace('\n', ' ');
 				attrValue= attrValue.trim();
 				mCurrentCelebrity.setCatagory(attrValue);
 			}
-			else if (localName.equalsIgnoreCase(CelebrityData.NUM_OF_PICS))
+			else if (localName.equalsIgnoreCase(CelebrityData.CELEBRITY_NUM_OF_PICS))
 			{
 				String attrValue = mBuilder.toString();
 				attrValue = attrValue.replace('\n', ' ');
@@ -79,7 +79,7 @@ public class CelebrityConfigHandler extends DefaultHandler
 		super.startElement(uri, localName, name, attributes);
 		if (localName.equalsIgnoreCase(CelebrityData.CELEBRITY))
 		{
-			// 
+			// Do nothings this is the root element tag
 		}
 		if (localName.equalsIgnoreCase(CelebrityData.CELEBRITY_ENTRY))
 		{
