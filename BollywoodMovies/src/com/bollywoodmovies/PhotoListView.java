@@ -14,7 +14,8 @@
  * $Date:$
  * $Id:$
  * 
- ******************************************************************************/package com.bollywoodmovies;
+ ******************************************************************************/
+package com.bollywoodmovies;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,10 +65,11 @@ public class PhotoListView extends ListActivity
 		mListOfCelebritiesStr = new String[listOfCelebrities.size()];
 		int celebrityCount = 0;
 
+//        Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
 		for (Iterator<CelebrityData> it = listOfCelebrities.iterator(); it.hasNext();)
 		{
 			CelebrityData celebrityData = (CelebrityData) it.next();
-			Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n" + celebrityData.toString());
+//			Log.i(CommonConstants.LOG_TAG, celebrityData.toString());
 			mListOfCelebritiesStr[celebrityCount++] = celebrityData.getName();
 		}
 
@@ -104,7 +106,7 @@ public class PhotoListView extends ListActivity
 		String selectedItem = mListOfCelebritiesStr[position];
 		Log.d(CommonConstants.LOG_TAG, "selectedItem : [ " + selectedItem + " ]");
 
-		if (selectedItem == MAIN_MENU)
+		if (selectedItem.equals(MAIN_MENU))
 		{
 			Log.d(CommonConstants.LOG_TAG, "Open Main Menu...");
 			Intent intent = new Intent(view.getContext(), MenuActivity.class);

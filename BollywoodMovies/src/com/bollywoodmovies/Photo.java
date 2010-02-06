@@ -27,6 +27,7 @@ import com.bollywoodmovies.config.Configuration;
 import com.util.CommonConstants;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -230,32 +231,40 @@ public class Photo extends BaseApplicationActivity {
 		Drawable image = ImageOperations(context, url);
 		imageView = (ImageView) findViewById(R.id.PhotoImageView);
 
-		int height = image.getIntrinsicHeight();
-		int width = image.getIntrinsicWidth();
-		Log.d(CommonConstants.LOG_TAG, "Height " + height + "   width " + width);
+		if (null != image)
+		{
+	        int height = image.getIntrinsicHeight();
+	        int width = image.getIntrinsicWidth();
+		    
+	        Log.d(CommonConstants.LOG_TAG, "Height " + height + "   width " + width);
 
-		/*
-		 * http://developer.android.com/reference/android/widget/ImageView.html
-		 * An optional argument to supply a maximum height for this view. 
-		 * Only valid if setAdjustViewBounds(boolean) has been set to true. 
-		 * To set an image to be a maximum of 100 x 100 while preserving the 
-		 * original aspect ratio, do the following: 
-		 * 1) set adjustViewBounds to true 
-		 * 2) set maxWidth and maxHeight to 100 
-		 * 3) set the height and width layout params to WRAP_CONTENT. 
-		 * 
-		 * Note that this view could be still smaller than 100 x 100 using this 
-		 * approach if the original image is small. To set an image to a fixed size, 
-		 * specify that size in the layout params and then use setScaleType(ImageView.ScaleType) 
-		 * to determine how to fit the image within the bounds. 
-		 */
-		imageView.setAdjustViewBounds(SET_ADJUST_VIEW);
-		imageView.setMaxHeight(230);
-		imageView.setMaxWidth(230);
-		imageView.setMinimumHeight(200);
-		imageView.setMinimumWidth(200);
-	
-		imageView.setImageDrawable(image);
+	        /*
+	         * http://developer.android.com/reference/android/widget/ImageView.html
+	         * An optional argument to supply a maximum height for this view. 
+	         * Only valid if setAdjustViewBounds(boolean) has been set to true. 
+	         * To set an image to be a maximum of 100 x 100 while preserving the 
+	         * original aspect ratio, do the following: 
+	         * 1) set adjustViewBounds to true 
+	         * 2) set maxWidth and maxHeight to 100 
+	         * 3) set the height and width layout params to WRAP_CONTENT. 
+	         * 
+	         * Note that this view could be still smaller than 100 x 100 using this 
+	         * approach if the original image is small. To set an image to a fixed size, 
+	         * specify that size in the layout params and then use setScaleType(ImageView.ScaleType) 
+	         * to determine how to fit the image within the bounds. 
+	         */
+	        imageView.setAdjustViewBounds(SET_ADJUST_VIEW);
+	        imageView.setMaxHeight(230);
+	        imageView.setMaxWidth(230);
+	        imageView.setMinimumHeight(200);
+	        imageView.setMinimumWidth(200);
+	    
+	        imageView.setImageDrawable(image);
+		}
+		else
+		{		    
+            MainApp.getInstance().handleException(new NullPointerException());   
+		}
 
 	}
 

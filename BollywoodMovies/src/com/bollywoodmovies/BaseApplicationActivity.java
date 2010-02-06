@@ -49,7 +49,7 @@ public class BaseApplicationActivity extends Activity
 
 	    //| Get button from layout
 	    Button photoGalleryButton = (Button)findViewById(R.id.ButtonPhotoGallery);
-	    photoGalleryButton.setText("Photo Gallery");
+	    photoGalleryButton.setText("Photos");
 	    
 	    //| Register the onClick listener with the implementation above
 	    photoGalleryButton.setOnClickListener(MainApp.getInstance().getPhotoGalleryButtonListener());
