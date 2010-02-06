@@ -15,4 +15,7 @@ public class CommonConstants
 	public static final long DEFAULT_LONG = Long.MAX_VALUE;
 	
 	public static final int MAX_PICS_PER_CELEBRITY = 3;
+
+	public static final String TO_STRING_SEPERATOR = "----------------------------------- \n";
+	public static final String NEW_LINE = "\n";
 }
