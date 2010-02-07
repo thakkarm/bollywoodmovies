@@ -47,6 +47,10 @@ public class SplashActivity extends BaseApplicationActivity
 
 		MainApp.getInstance().setSplashActivity(this);
 
+        // Display the logo
+        ImageView logoView = (ImageView) findViewById(R.id.LogoView);
+        logoView.setImageResource(R.drawable.logo);
+
 		/*
 		// do what you want to do before sleeping
 		try
@@ -74,14 +78,8 @@ public class SplashActivity extends BaseApplicationActivity
 				+ "::onStart()");
 		super.onStart();
 
-		// Display the logo
-		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
-		logoView.setImageResource(R.drawable.logo);
-
 		Intent intent = new Intent(this.getBaseContext(), MenuActivity.class);
 		MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
-
-		MainApp.getInstance().init();
 
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + SplashActivity.class
 				+ "::onStart()");

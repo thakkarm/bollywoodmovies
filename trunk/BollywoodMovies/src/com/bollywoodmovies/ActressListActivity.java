@@ -14,7 +14,8 @@
  * $Date$
  * $Id$
  * 
- ******************************************************************************/package com.bollywoodmovies;
+ ******************************************************************************/
+package com.bollywoodmovies;
 
 import com.util.CommonConstants;
 

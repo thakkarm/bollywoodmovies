@@ -37,15 +37,12 @@ import com.bollywoodmovies.config.Configuration;
 import com.util.CommonConstants;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class PhotoListView extends ListActivity
@@ -59,8 +56,16 @@ public class PhotoListView extends ListActivity
 		super.onCreate(savedInstanceState);
 
 		Configuration config = Configuration.getInstance();
-		ArrayList<CelebrityData> listOfCelebrities = new ArrayList<CelebrityData>(config
-				.getCelebrities());
+		List<CelebrityData> celebrities = config.getCelebrities();
+		if (null == celebrities)
+		{
+		    //TODO remove???
+
+		    BaseAlertDialog alertDialog = new BaseAlertDialog(this);
+		    alertDialog.show();
+		    
+		}
+		ArrayList<CelebrityData> listOfCelebrities = new ArrayList<CelebrityData>(celebrities);
 
 		mListOfCelebritiesStr = new String[listOfCelebrities.size()];
 		int celebrityCount = 0;
@@ -128,9 +133,6 @@ public class PhotoListView extends ListActivity
 
 			Intent intent = new Intent(view.getContext(), Photo.class);
 			mainApp.getSplashActivity().startActivityForResult(intent, 0);
-
-			// String url = this.createURL(position, id);
-			// openURL(url);
 		}
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + PhotoListView.class
 				+ "::onListItemClick()");

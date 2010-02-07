@@ -16,9 +16,6 @@
  * 
  ******************************************************************************/package com.bollywoodmovies;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
 public class Notes
 {
 
@@ -27,6 +24,9 @@ public class Notes
 	 * to set 230 x 230 as streach to fit option,
 	 *************/
 	
+    //TODO
+    // add theme
+    // http://developer.android.com/guide/topics/ui/themes.html
 	
 	// RSS Feed Parser Example
 	// http://www.ibm.com/developerworks/opensource/library/x-android/index.html
