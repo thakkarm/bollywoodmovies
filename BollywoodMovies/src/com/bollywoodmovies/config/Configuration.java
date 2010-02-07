@@ -73,21 +73,22 @@ public class Configuration
 		try
         {
             xmlFileLoader.loadXMLFromURL(CONFIG_CELEBRITY, celebrityConfigHandler);
+
+            // | Get the parsed data
+            mCelebrities = celebrityConfigHandler.getCelebrities();
+            Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
+            for (Iterator<CelebrityData> it = mCelebrities.iterator(); it.hasNext();)
+            {
+                CelebrityData celebrityData = (CelebrityData) it.next();
+                Log.i(CommonConstants.LOG_TAG, celebrityData.toString());
+            }
+            Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
         } catch (XMLFileLoaderException e)
         {
             e.printStackTrace();
             MainApp.getInstance().handleException(e);
         }
 
-		// | Get the parsed data
-		mCelebrities = celebrityConfigHandler.getCelebrities();
-        Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
-        for (Iterator<CelebrityData> it = mCelebrities.iterator(); it.hasNext();)
-        {
-            CelebrityData celebrityData = (CelebrityData) it.next();
-            Log.i(CommonConstants.LOG_TAG, celebrityData.toString());
-        }
-        Log.i(CommonConstants.LOG_TAG, "CelebrityData : ---------- \n");
 	}
 
     public void loadNewsConfig()
@@ -101,21 +102,21 @@ public class Configuration
         try
         {
             xmlFileLoader.loadXMLFromURL(CONFIG_NEWS, newsConfigHandler);
+
+            // | Get the parsed data
+            mNews = newsConfigHandler.getNews();
+            Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
+            for (Iterator<NewsData> it = mNews.iterator(); it.hasNext();)
+            {
+                NewsData newsData = (NewsData) it.next();
+                Log.i(CommonConstants.LOG_TAG, newsData.toString());
+            }
+            Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
         } catch (XMLFileLoaderException e)
         {
             e.printStackTrace();
             MainApp.getInstance().handleException(e);
         }
-
-        // | Get the parsed data
-        mNews = newsConfigHandler.getNews();
-        Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
-        for (Iterator<NewsData> it = mNews.iterator(); it.hasNext();)
-        {
-            NewsData newsData = (NewsData) it.next();
-            Log.i(CommonConstants.LOG_TAG, newsData.toString());
-        }
-        Log.i(CommonConstants.LOG_TAG, "NewsData : ---------- \n");
     }
 
 	private void loadCelebrityConfigOldWorks()
@@ -205,6 +206,22 @@ public class Configuration
 		return this.mCelebrities;
 	}
 
+    public List<NewsData> getNewsList()
+    {
+        return this.mNews;
+    }
+
+    public NewsData getNewsList(int newsIndex)
+    {
+        return this.mNews.get(newsIndex);
+    }
+
+    public int getNewsListSize()
+    {
+        return this.mNews.size();
+    }
+
+       
 	public CelebrityData getCelebrityData(String celebrityName)
 	{
 		CelebrityData foundCelebrityData = null;
