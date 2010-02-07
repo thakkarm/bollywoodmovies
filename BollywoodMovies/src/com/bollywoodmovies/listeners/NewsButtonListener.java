@@ -18,7 +18,7 @@
 package com.bollywoodmovies.listeners;
 
 import com.bollywoodmovies.MainApp;
-import com.bollywoodmovies.NewsActivity;
+import com.bollywoodmovies.NewsListView;
 import com.util.CommonConstants;
 
 import android.view.View;
@@ -36,7 +36,7 @@ public class NewsButtonListener implements OnClickListener
 
 		if (null != view)
 		{
-			Intent intent = new Intent(view.getContext(), NewsActivity.class);
+			Intent intent = new Intent(view.getContext(), NewsListView.class);
 			MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
 			//Intent intent = new Intent(view.getContext(), HelloListView.class);
 			//MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
