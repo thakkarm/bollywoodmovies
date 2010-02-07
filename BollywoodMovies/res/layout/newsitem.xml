@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+<Button android:text="@+id/ButtonPrev" android:id="@+id/ButtonPrev" android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawableLeft="@drawable/prevsmall"></Button>
+<Button android:text="@+id/ButtonMainMenu" android:id="@+id/ButtonMainMenu" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="@+id/ButtonNext" android:id="@+id/ButtonNext" android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawableRight="@drawable/nextsmall"></Button>
+
+</LinearLayout>
+
+<LinearLayout android:id="@+id/LinearLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:text="@+id/TextViewNewsDate" android:id="@+id/TextViewNewsDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>
+</LinearLayout><LinearLayout android:id="@+id/LinearLayout04" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:text="@+id/TextViewNewsTitle" android:id="@+id/TextViewNewsTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView></LinearLayout><LinearLayout android:id="@+id/LinearLayout02" android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+<TextView android:text="@+id/TextViewNewsBody" android:id="@+id/TextViewNewsBody" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+</LinearLayout>
+
+<LinearLayout android:id="@+id/LinearLayoutFooter" android:layout_width="wrap_content" android:layout_height="wrap_content">
+<!--
+<Button android:text="@+id/ButtonPhotoGallery" android:id="@+id/ButtonPhotoGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="@+id/ButtonNews" android:id="@+id/ButtonNews" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="@+id/ButtonAboutUs" android:id="@+id/ButtonAboutUs" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+-->
+</LinearLayout>
+
+
+
+
+
+</LinearLayout>
