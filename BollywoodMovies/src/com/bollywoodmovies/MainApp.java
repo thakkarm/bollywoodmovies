@@ -19,8 +19,10 @@ package com.bollywoodmovies;
 
 import java.io.InputStream;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -31,308 +33,361 @@ import com.bollywoodmovies.listeners.NewsButtonListener;
 import com.bollywoodmovies.listeners.PhotoGalleryButtonListener;
 import com.util.CommonConstants;
 
-public class MainApp {
-	// | -----------------------------------------------------------------------
-	// | Public Operations
-	// | -----------------------------------------------------------------------
-	public static MainApp getInstance() {
-		if (null == instance) {
-			// Create the one and only instance of the object
-			instance = new MainApp();
-		}
-		return instance;
-	}
+public class MainApp
+{
+    // | -----------------------------------------------------------------------
+    // | Public Operations
+    // | -----------------------------------------------------------------------
+    public static MainApp getInstance()
+    {
+        if (null == instance)
+        {
+            // Create the one and only instance of the object
+            instance = new MainApp();
+        }
+        return instance;
+    }
 
-	public String getURLBollywoodActress(String nameOfPerson) {
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
-				+ "::getURLBollywoodActress()");
+    public String getURLBollywoodActress(String nameOfPerson)
+    {
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
+                + "::getURLBollywoodActress()");
 
-		// | Covert the selected item to lowercase and replace spaces with _
-		String personNameLowerCase = nameOfPerson.toLowerCase();
-		String personNameLowerCaseWithUnderscores = personNameLowerCase
-				.replace(" ", "_");
-		Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
-				+ personNameLowerCaseWithUnderscores + " ]");
-		Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentPersonIndex + " ]");
+        // | Covert the selected item to lowercase and replace spaces with _
+        String personNameLowerCase = nameOfPerson.toLowerCase();
+        String personNameLowerCaseWithUnderscores = personNameLowerCase
+                .replace(" ", "_");
+        Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
+                + personNameLowerCaseWithUnderscores + " ]");
+        Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentPersonIndex + " ]");
 
-		String url = PIC_URL.toString();
-		url = url.replaceAll(TAG_DIR_PERSON_NAME,
-				personNameLowerCaseWithUnderscores);
-		String num = CommonConstants.EMPTY_STRING;
-		if (mCurrentPersonIndex < 10) {
-			num = "0" + Long.toString(mCurrentPersonIndex);
-		} else {
-			num = Long.toString(mCurrentPersonIndex);
-		}
-		url = url.replaceAll(TAG_PERSON_NAME_ID, num);
+        String url = PIC_URL.toString();
+        url = url.replaceAll(TAG_DIR_PERSON_NAME,
+                personNameLowerCaseWithUnderscores);
+        String num = CommonConstants.EMPTY_STRING;
+        if (mCurrentPersonIndex < 10)
+        {
+            num = "0" + Long.toString(mCurrentPersonIndex);
+        } else
+        {
+            num = Long.toString(mCurrentPersonIndex);
+        }
+        url = url.replaceAll(TAG_PERSON_NAME_ID, num);
 
-		Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");
+        Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");
 
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
-				+ "::getURLBollywoodActress()");
-		return url;
-	}
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
+                + "::getURLBollywoodActress()");
+        return url;
+    }
 
-	public void handleException(Exception exception) {
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
-				+ "::handleException()");
+    public void handleException(Exception exception)
+    {
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
+                + "::handleException()");
 
-		
-		Log.e(CommonConstants.LOG_TAG, "-----------------------------------------------");
-		Log.e(CommonConstants.LOG_TAG, exception.toString());
+        Log.e(CommonConstants.LOG_TAG,
+                "-----------------------------------------------");
+        Log.e(CommonConstants.LOG_TAG, exception.toString());
 
-		// TODO
-		// Add popup that application error, try again...
-		// **** Current sending to About page but need to FIX.....
+        // TODO
+        // Add popup that application error, try again...
+        // **** Current sending to About page but need to FIX.....
         Context context = mSplashActivity.getApplicationContext();
-        Intent intent = new Intent(context, AboutUsActivity.class);
-        MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);            
+        //Intent intent = new Intent(context, AboutUsActivity.class);
+        //MainApp.getInstance().getSplashActivity().startActivityForResult(
+        //        intent, 0);
 
-		Log.e(CommonConstants.LOG_TAG, "-----------------------------------------------");
-		
+        BaseAlertDialog alertDialog = new BaseAlertDialog(context);
+        alertDialog.show();
 
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
-				+ "::handleException()");
-	}
+        Log.e(CommonConstants.LOG_TAG,
+                "-----------------------------------------------");
 
-	public boolean createOptionMenu(Menu menu) {
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
-				+ "::onCreateOptionsMenu()");
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
+                + "::handleException()");
+    }
 
-		// TODO
-		// This menus are display when the menu button is clicked while app is
-		// running
-		menu.add("Menu 1");
-		menu.add("Menu 2");
-		// menu.add(1, 1, MENU_1_ID, "Menu 4");
+    public boolean createOptionMenu(Menu menu)
+    {
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
+                + "::onCreateOptionsMenu()");
 
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
-				+ "::onCreateOptionsMenu()");
-		return true;
-	}
+        // TODO
+        // This menus are display when the menu button is clicked while app is
+        // running
+        // menu.add("Menu 1");
+        // menu.add("Menu 2");
+        // menu.add(1, 1, MENU_1_ID, "Menu 4");
 
-	/**
-	 * @param mSplashActivity
-	 *            the mSplashActivity to set
-	 */
-	public void setSplashActivity(SplashActivity mSplashActivity) {
-		this.mSplashActivity = mSplashActivity;
-	}
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
+                + "::onCreateOptionsMenu()");
+        return true;
+    }
 
-	/**
-	 * @return the mSplashActivity
-	 */
-	public SplashActivity getSplashActivity() {
-		return mSplashActivity;
-	}
+    /**
+     * @param mSplashActivity
+     *            the mSplashActivity to set
+     */
+    public void setSplashActivity(SplashActivity mSplashActivity)
+    {
+        this.mSplashActivity = mSplashActivity;
+    }
 
-	/**
-	 * @param mMenuActivity
-	 *            the mMenuActivity to set
-	 */
-	public void setMenuActivity(MenuActivity mMenuActivity) {
-		this.mMenuActivity = mMenuActivity;
-	}
+    /**
+     * @return the mSplashActivity
+     */
+    public SplashActivity getSplashActivity()
+    {
+        return mSplashActivity;
+    }
 
-	/**
-	 * @return the mMenuActivity
-	 */
-	public MenuActivity getMenuActivity() {
-		return mMenuActivity;
-	}
+    /**
+     * @param mMenuActivity
+     *            the mMenuActivity to set
+     */
+    public void setMenuActivity(MenuActivity mMenuActivity)
+    {
+        this.mMenuActivity = mMenuActivity;
+    }
 
-	/**
-	 * @param mPhotoGalleryActivity
-	 *            the mPhotoGalleryActivity to set
-	 */
-	public void setPhotoGalleryActivity(
-			PhotoGalleryActivity mPhotoGalleryActivity) {
-		this.mPhotoGalleryActivity = mPhotoGalleryActivity;
-	}
+    /**
+     * @return the mMenuActivity
+     */
+    public MenuActivity getMenuActivity()
+    {
+        return mMenuActivity;
+    }
 
-	/**
-	 * @return the mPhotoGalleryActivity
-	 */
-	public PhotoGalleryActivity getPhotoGalleryActivity() {
-		return mPhotoGalleryActivity;
-	}
+    /**
+     * @param mPhotoGalleryActivity
+     *            the mPhotoGalleryActivity to set
+     */
+    public void setPhotoGalleryActivity(
+            PhotoGalleryActivity mPhotoGalleryActivity)
+    {
+        this.mPhotoGalleryActivity = mPhotoGalleryActivity;
+    }
 
-	// | -----------------------------------------------------------------------
-	// | Private Class Operations
-	// | -----------------------------------------------------------------------
-	private MainApp() {
-		mPhotoGalleryButtonListener = new PhotoGalleryButtonListener();
-		mAboutUsButtonListener = new AboutUsButtonListener();
-		mNewsButtonListener = new NewsButtonListener();
-	}
+    /**
+     * @return the mPhotoGalleryActivity
+     */
+    public PhotoGalleryActivity getPhotoGalleryActivity()
+    {
+        return mPhotoGalleryActivity;
+    }
 
-	/**
-	 * @return the mPhotoGalleryButtonListener
-	 */
-	public PhotoGalleryButtonListener getPhotoGalleryButtonListener() {
-		return mPhotoGalleryButtonListener;
-	}
+    // | -----------------------------------------------------------------------
+    // | Private Class Operations
+    // | -----------------------------------------------------------------------
+    private MainApp()
+    {
+        mPhotoGalleryButtonListener = new PhotoGalleryButtonListener();
+        mAboutUsButtonListener = new AboutUsButtonListener();
+        mNewsButtonListener = new NewsButtonListener();
+    }
 
-	/**
-	 * @return the mAboutUsButtonListener
-	 */
-	public AboutUsButtonListener getAboutUsButtonListener() {
-		return mAboutUsButtonListener;
-	}
+    /**
+     * @return the mPhotoGalleryButtonListener
+     */
+    public PhotoGalleryButtonListener getPhotoGalleryButtonListener()
+    {
+        return mPhotoGalleryButtonListener;
+    }
 
-	/**
-	 * @return the mNewsButtonListener
-	 */
-	public NewsButtonListener getNewsButtonListener() {
-		return mNewsButtonListener;
-	}
+    /**
+     * @return the mAboutUsButtonListener
+     */
+    public AboutUsButtonListener getAboutUsButtonListener()
+    {
+        return mAboutUsButtonListener;
+    }
 
-	/**
-	 * @param mNewsActivity
-	 *            the mNewsActivity to set
-	 */
-	public void setNewsActivity(NewsActivity mNewsActivity) {
-		this.mNewsActivity = mNewsActivity;
-	}
+    /**
+     * @return the mNewsButtonListener
+     */
+    public NewsButtonListener getNewsButtonListener()
+    {
+        return mNewsButtonListener;
+    }
 
-	/**
-	 * @return the mNewsActivity
-	 */
-	public NewsActivity getNewsActivity() {
-		return mNewsActivity;
-	}
+    /**
+     * @param mNewsActivity
+     *            the mNewsActivity to set
+     */
+    public void setNewsActivity(NewsActivity mNewsActivity)
+    {
+        this.mNewsActivity = mNewsActivity;
+    }
 
-	/**
-	 * @param mAboutUsActivity
-	 *            the mAboutUsActivity to set
-	 */
-	public void setAboutUsActivity(AboutUsActivity mAboutUsActivity) {
-		this.mAboutUsActivity = mAboutUsActivity;
-	}
+    /**
+     * @return the mNewsActivity
+     */
+    public NewsActivity getNewsActivity()
+    {
+        return mNewsActivity;
+    }
 
-	/**
-	 * @return the mAboutUsActivity
-	 */
-	public AboutUsActivity getAboutUsActivity() {
-		return mAboutUsActivity;
-	}
+    /**
+     * @param mAboutUsActivity
+     *            the mAboutUsActivity to set
+     */
+    public void setAboutUsActivity(AboutUsActivity mAboutUsActivity)
+    {
+        this.mAboutUsActivity = mAboutUsActivity;
+    }
 
-	/**
-	 * @param mCurrentPersonName
-	 *            the mCurrentPersonName to set
-	 */
-	public void setCurrentPersonName(String currentPersonName) {
-		this.mCurrentPersonName = currentPersonName;
-	}
+    /**
+     * @return the mAboutUsActivity
+     */
+    public AboutUsActivity getAboutUsActivity()
+    {
+        return mAboutUsActivity;
+    }
 
-	/**
-	 * @return the mCurrentPersonName
-	 */
-	public String getCurrentPersonName() {
-		return mCurrentPersonName;
-	}
+    /**
+     * @param mCurrentPersonName
+     *            the mCurrentPersonName to set
+     */
+    public void setCurrentPersonName(String currentPersonName)
+    {
+        this.mCurrentPersonName = currentPersonName;
+    }
 
-	/**
-	 * @param mCurrentPersonIndex
-	 *            the mCurrentPersonIndex to set
-	 */
-	public void setCurrentPersonIndex(long currentPersonIndex) {
-		this.mCurrentPersonIndex = currentPersonIndex;
-	}
+    /**
+     * @return the mCurrentPersonName
+     */
+    public String getCurrentPersonName()
+    {
+        return mCurrentPersonName;
+    }
 
-	/**
-	 * @return the mCurrentPersonIndex
-	 */
-	public long getCurrentPersonIndex() {
-		return mCurrentPersonIndex;
-	}
+    /**
+     * @param mCurrentPersonIndex
+     *            the mCurrentPersonIndex to set
+     */
+    public void setCurrentPersonIndex(long currentPersonIndex)
+    {
+        this.mCurrentPersonIndex = currentPersonIndex;
+    }
 
-	public void init() {
-		if (mInited == false) {
-			// TODO
-			// Check if HTTP or WiFi is available if not, popup error and exit
+    /**
+     * @return the mCurrentPersonIndex
+     */
+    public long getCurrentPersonIndex()
+    {
+        return mCurrentPersonIndex;
+    }
 
-			// Get the local configuration file from the resource dir
-			// setLocalXml(getSplashActivity().getApplicationContext().getResources().openRawResource(R.raw.celebrities));
+    /**
+     * @param mCurrentNewsIndex the mCurrentNewsIndex to set
+     */
+    public void setCurrentNewsIndex(int mCurrentNewsIndex)
+    {
+        this.mCurrentNewsIndex = mCurrentNewsIndex;
+    }
 
-			Configuration config = Configuration.getInstance();
-			config.loadCelebrityConfig();
-			config.loadNewsConfig();
-			mInited = true;
-		}
-	}
+    /**
+     * @return the mCurrentNewsIndex
+     */
+    public int getCurrentNewsIndex()
+    {
+        return mCurrentNewsIndex;
+    }
 
-	/**
-	 * @param mLocalXml
-	 *            the mLocalXml to set
-	 */
-	public void setLocalXml(InputStream mLocalXml) {
-		this.mLocalXml = mLocalXml;
-	}
+    public void init()
+    {
+        if (mInited == false)
+        {
+            // TODO
+            // Check if HTTP or WiFi is available if not, popup error and exit
 
-	/**
-	 * @return the mLocalXml
-	 */
-	public InputStream getLocalXml() {
-		return mLocalXml;
-	}
+            // Get the local configuration file from the resource dir
+            // setLocalXml(getSplashActivity().getApplicationContext().getResources().openRawResource(R.raw.celebrities));
 
-	/**
-	 * 
-	 * Method to send email
-	 */
+            Configuration config = Configuration.getInstance();
+            config.loadCelebrityConfig();
+            config.loadNewsConfig();
+            mInited = true;
+        }
+    }
 
-	protected void sendEmail() {
+    /**
+     * @param mLocalXml
+     *            the mLocalXml to set
+     */
+    public void setLocalXml(InputStream mLocalXml)
+    {
+        this.mLocalXml = mLocalXml;
+    }
 
-		// Setup the recipient in a String array
-		String mailto = "info@bollywoodmovies.us";
-		String subject = "Suggestion";
-		String body = "user fillin";
-		
-		// Create a new Intent to send messages
-		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+    /**
+     * @return the mLocalXml
+     */
+    public InputStream getLocalXml()
+    {
+        return mLocalXml;
+    }
 
-		// Add attributes to the intent
-		sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
-		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-		sendIntent.setType("text/plain");
+    /**
+     * 
+     * Method to send email
+     */
 
-		mAboutUsActivity.startActivity(Intent.createChooser(sendIntent, "SendEmail"));
-	}
+    protected void sendEmail()
+    {
 
-	// | -----------------------------------------------------------------------
-	// | Private Class Attributes
-	// | -----------------------------------------------------------------------
-	private static MainApp instance = null;
+        // Setup the recipient in a String array
+        String mailto = "info@bollywoodmovies.us";
+        String subject = "Suggestion";
+        String body = "user fillin";
 
-	private SplashActivity mSplashActivity = null;
-	private AboutUsActivity mAboutUsActivity = null;
-	private NewsActivity mNewsActivity = null;
-	private MenuActivity mMenuActivity = null;
-	private PhotoGalleryActivity mPhotoGalleryActivity = null;
+        // Create a new Intent to send messages
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
 
-	private PhotoGalleryButtonListener mPhotoGalleryButtonListener = null;
-	private AboutUsButtonListener mAboutUsButtonListener = null;
-	private NewsButtonListener mNewsButtonListener = null;
+        // Add attributes to the intent
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, body);
+        sendIntent.setType("text/plain");
 
-	static final String BOLLYWOOD_MOVIES_URL = "http://www.bollywoodmovies.us/";
+        mAboutUsActivity.startActivity(Intent.createChooser(sendIntent,
+                "SendEmail"));
+    }
 
-	private static int MENU_1_ID = 1;
+    // | -----------------------------------------------------------------------
+    // | Private Class Attributes
+    // | -----------------------------------------------------------------------
+    private static MainApp instance = null;
 
-	private InputStream mLocalXml = null;
+    private SplashActivity mSplashActivity = null;
+    private AboutUsActivity mAboutUsActivity = null;
+    private NewsActivity mNewsActivity = null;
+    private MenuActivity mMenuActivity = null;
+    private PhotoGalleryActivity mPhotoGalleryActivity = null;
 
-	private String mCurrentPersonName = CommonConstants.EMPTY_STRING;
-	private long mCurrentPersonIndex = 0;
+    private PhotoGalleryButtonListener mPhotoGalleryButtonListener = null;
+    private AboutUsButtonListener mAboutUsButtonListener = null;
+    private NewsButtonListener mNewsButtonListener = null;
 
-	private boolean mInited = false;
+    static final String BOLLYWOOD_MOVIES_URL = "http://www.bollywoodmovies.us/";
 
-	static String TAG_DIR_PERSON_NAME = "TAG_DIR_PERSON_NAME";
-	static String TAG_PERSON_NAME_ID = "TAG_PERSON_NAME_ID";
+    private InputStream mLocalXml = null;
 
-	static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pics/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+    private String mCurrentPersonName = CommonConstants.EMPTY_STRING;
+    private long mCurrentPersonIndex = CommonConstants.DEFAULT_LONG;
 
-	// TODO
-	// Set flag to false before release and also remove some repeat logging
-	static boolean DEBUG = true;
+    private int mCurrentNewsIndex = CommonConstants.DEFAULT_INT;
+    
+    private boolean mInited = false;
+
+    static String TAG_DIR_PERSON_NAME = "TAG_DIR_PERSON_NAME";
+    static String TAG_PERSON_NAME_ID = "TAG_PERSON_NAME_ID";
+
+//    static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pics/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+    static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pictures/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+
+    // TODO
+    // Set flag to false before release and also remove some repeat logging
+    static boolean DEBUG = true;
 }

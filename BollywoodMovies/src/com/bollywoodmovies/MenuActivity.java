@@ -14,7 +14,8 @@
  * $Date$
  * $Id$
  * 
- ******************************************************************************/package com.bollywoodmovies;
+ ******************************************************************************/
+package com.bollywoodmovies;
 
 import com.util.CommonConstants;
 
@@ -77,6 +78,9 @@ public class MenuActivity extends BaseApplicationActivity
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MenuActivity.class
 				+ "::onStart()");
 		super.onStart();
+
+		//| Initilize the application
+        MainApp.getInstance().init();
 
 		// Display the logo
 		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
