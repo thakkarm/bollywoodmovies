@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:admobsdk="http://schemas.android.com/apk/res/com.bollywoodmovies"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
+<!-- Ad Mob Layout -->
+<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+	<com.admob.android.ads.AdView  
+	        android:id="@+id/ad" 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        admobsdk:backgroundColor="#000000"
+	        admobsdk:textColor="#FFFFFF"
+	        admobsdk:keywords="Android application"
+	/>
+</LinearLayout>	
+
+<LinearLayout android:id="@+id/LinearLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content">
+<TextView android:text="@+id/TextViewHeader" android:id="@+id/TextViewHeader" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>
+</LinearLayout>
+
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 
 <Button android:text="@+id/ButtonPrev" android:id="@+id/ButtonPrev" android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawableLeft="@drawable/prevsmall"></Button>
@@ -13,7 +31,9 @@
 </LinearLayout>
 
 <LinearLayout android:id="@+id/LinearLayout02" android:layout_width="wrap_content" android:layout_height="wrap_content">
+ 
  <ImageView android:id="@+id/PhotoImageView" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageView>
+
 </LinearLayout>
 
 <LinearLayout android:id="@+id/LinearLayoutFooter" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -22,9 +42,7 @@
 <Button android:text="@+id/ButtonNews" android:id="@+id/ButtonNews" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/ButtonAboutUs" android:id="@+id/ButtonAboutUs" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 -->
+
 </LinearLayout>
-
-
-
 
 </LinearLayout>
