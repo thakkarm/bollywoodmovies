@@ -35,4 +35,5 @@ public class CommonConstants
 
 	public static final String TO_STRING_SEPERATOR = "----------------------------------- \n";
 	public static final String NEW_LINE = "\n";
+	public static final String EXCEPTION_SEPARATOR = "----------------------------------- \n";
 }
