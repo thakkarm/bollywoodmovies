@@ -22,12 +22,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.bollywoodmovies.config.CelebrityData;
-import com.bollywoodmovies.config.Configuration;
-import com.util.CommonConstants;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,10 +31,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bollywoodmovies.config.CelebrityData;
+import com.bollywoodmovies.config.Configuration;
+import com.util.CommonConstants;
 
 public class Photo extends BaseApplicationActivity
 {
@@ -48,7 +46,7 @@ public class Photo extends BaseApplicationActivity
 
     public void onCreate(Bundle icicle)
     {
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                 + "::onCreateOptionsMenu()");
         super.onCreate(icicle);
         setContentView(R.layout.photoitem);
@@ -96,23 +94,17 @@ public class Photo extends BaseApplicationActivity
         photoGalleryButton.setOnClickListener(MainApp.getInstance()
                 .getPhotoGalleryButtonListener());
 
-        // ***** This section works with regular buttons ****
-
-        /*
-         * ImageButton prevButton = (ImageButton)
-         * findViewById(R.id.ButtonImagePrev);
-         * prevButton.setOnClickListener(prevOnClickListner);
-         * 
-         * ImageButton nextButton = (ImageButton)
-         * findViewById(R.id.ButtonImageNext);
-         * nextButton.setOnClickListener(nextOnClickListner);
-         */
-
+        TextView headerText = (TextView) findViewById(R.id.TextViewHeader);
+        //leftSideText.setLines(23);
+        //leftSideText.setWidth(20);
+        headerText.setText("                www.BollywoodMovies.us");
+//        leftSideText.setText("W\nW\nW\n.\nB\nO\nL\nL\nY\nW\nO\nO\nD\nM\nO\nV\nI\nE\nS\n.\nU\nS");
+        
         mGestureDetector = new GestureDetector(this, new GestureListener());
 
-        String currentCelebrity = MainApp.getInstance().getCurrentPersonName();
-        String url = MainApp.getInstance().getURLBollywoodActress(
-                currentCelebrity);
+        MainApp mainApp = MainApp.getInstance();
+        String currentCelebrity = mainApp.getCurrentPersonName();
+        String url = mainApp.getURLBollywoodCelebrity(mainApp.getCurrentSelectedCelebrity());
 
         // | Update the title to match the Celebrity photo being displayed
         setTitle(currentCelebrity);
@@ -120,46 +112,40 @@ public class Photo extends BaseApplicationActivity
         ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
         this.showImage(url, imgView);
 
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::onCreateOptionsMenu()");
     }
 
     public void showPreviousImage()
     {
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                 + "::showPreviousImage()");
 
-        String url = MainApp.getInstance().getURLBollywoodActress(
-                MainApp.getInstance().getCurrentPersonName());
+        MainApp mainApp = MainApp.getInstance();
+        CelebrityData currentCelebrity = mainApp.getCurrentSelectedCelebrity();
+        
+        long currentPersonIndex = mainApp.getCurrentPersonIndex();
+        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonIndex + "]");
+        currentPersonIndex--;
+        if (currentPersonIndex <= 0)
+        {
+            currentPersonIndex = currentCelebrity.getNumOfPics();
+        }
+
+        String url = mainApp.getURLBollywoodCelebrity(currentCelebrity);
 
         ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
         this.showImage(url, imgView);
 
-        // Context context = view.getContext();
-        // Context context = getApplicationContext();
-        // Drawable image = ImageOperations(context, url);
-        // ImageView imgView = new ImageView(context);
-        // imgView = (ImageView) findViewById(R.id.PhotoImageView);
-        // imgView.setImageDrawable(image);
-
-        MainApp mainApp = MainApp.getInstance();
-        long currentPersonIndex = mainApp.getCurrentPersonIndex();
-        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonIndex + "]");
-        currentPersonIndex--;
-        if (currentPersonIndex < 0)
-        {
-            currentPersonIndex = 0;
-        }
-
         mainApp.setCurrentPersonIndex(currentPersonIndex);
 
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::showPreviousImage()");
     }
 
     public void showNextImage()
     {
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                 + "::showNextImage()");
 
         MainApp mainApp = MainApp.getInstance();
@@ -176,26 +162,19 @@ public class Photo extends BaseApplicationActivity
         {
             celebrityMaxPics = celebrity.getNumOfPics();
         }
-        if (currentPersonIndex >= celebrityMaxPics)
+        // Given that index is 0 based, we can show one more image
+        if (currentPersonIndex > celebrityMaxPics)
         {
-            currentPersonIndex = 0;
+            currentPersonIndex = 1;
         }
         mainApp.setCurrentPersonIndex(currentPersonIndex);
 
-        String url = MainApp.getInstance().getURLBollywoodActress(
-                MainApp.getInstance().getCurrentPersonName());
+        String url = mainApp.getURLBollywoodCelebrity(mainApp.getCurrentSelectedCelebrity());
 
         ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
         this.showImage(url, imgView);
 
-        // Context context = view.getContext();
-        // Context context = getApplicationContext();
-        // Drawable image = ImageOperations(context, url);
-        // ImageView imgView = new ImageView(context);
-        // imgView = (ImageView) findViewById(R.id.PhotoImageView);
-        // imgView.setImageDrawable(image);
-
-        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
+        Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::showNextImage()");
     }
 
@@ -310,11 +289,11 @@ public class Photo extends BaseApplicationActivity
     OnClickListener prevOnClickListner = new OnClickListener() {
         public void onClick(View view)
         {
-            Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
+            Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                     + "::prevOnClickListner()");
 
             showPreviousImage();
-            Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT
+            Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT
                     + Photo.class + "::prevOnClickListner()");
         }
     };
@@ -322,25 +301,15 @@ public class Photo extends BaseApplicationActivity
     OnClickListener nextOnClickListner = new OnClickListener() {
         public void onClick(View view)
         {
-            Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
+            Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                     + "::nextOnClickListner()");
 
             showNextImage();
 
-            Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT
+            Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT
                     + Photo.class + "::nextOnClickListner()");
         }
     };
 
-    /*
-     * OnClickListener photoGalleryOnClickListner = new OnClickListener() {
-     * public void onClick(View view) { Log.i(CommonConstants.LOG_TAG,
-     * CommonConstants.LOG_IN + Photo.class + "::photoGalleryOnClickListner()");
-     * 
-     * 
-     * 
-     * Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class +
-     * "::photoGalleryOnClickListner()"); } };
-     */
 
 }

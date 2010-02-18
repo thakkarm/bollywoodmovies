@@ -33,9 +33,9 @@ public class BaseApplicationActivity extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + BaseApplicationActivity.class + "::onCreate()");
+		Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + BaseApplicationActivity.class + "::onCreate()");
 		super.onCreate(savedInstanceState);
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + BaseApplicationActivity.class + "::onCreate()");
+		Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + BaseApplicationActivity.class + "::onCreate()");
 	}
 
 	public void createFooterNavigationButton()
@@ -65,7 +65,7 @@ public class BaseApplicationActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		Log.d(CommonConstants.LOG_TAG, "Menu Selected [ " + item.getItemId() + " ]");
+		Log.v(CommonConstants.LOG_TAG, "Menu Selected [ " + item.getItemId() + " ]");
 		return true;
 	}
 	

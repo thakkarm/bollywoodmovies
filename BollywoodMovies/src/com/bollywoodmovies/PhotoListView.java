@@ -130,6 +130,7 @@ public class PhotoListView extends ListActivity
 			}
 
 			mainApp.setCurrentPersonName(selectedItem);
+			mainApp.setCurrentSelectedCelebrity(Configuration.getInstance().getCelebrity(position));
 
 			Intent intent = new Intent(view.getContext(), Photo.class);
 			mainApp.getSplashActivity().startActivityForResult(intent, 0);
@@ -155,8 +156,10 @@ public class PhotoListView extends ListActivity
 
 		MainApp.getInstance().setCurrentPersonIndex(id);
 		MainApp.getInstance().setCurrentPersonName(selectedItem);
-
-		url = MainApp.getInstance().getURLBollywoodActress(selectedItem);
+		
+		CelebrityData selectedCelebrity = Configuration.getInstance().getCelebrity(position);
+		
+		url = MainApp.getInstance().getURLBollywoodCelebrity(selectedCelebrity);
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + PhotoListView.class
 				+ "::createURL()");
 		return url;
