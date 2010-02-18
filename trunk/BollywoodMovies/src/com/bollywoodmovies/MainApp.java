@@ -19,14 +19,12 @@ package com.bollywoodmovies;
 
 import java.io.InputStream;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
+import com.bollywoodmovies.config.CelebrityData;
 import com.bollywoodmovies.config.Configuration;
 import com.bollywoodmovies.listeners.AboutUsButtonListener;
 import com.bollywoodmovies.listeners.NewsButtonListener;
@@ -48,13 +46,13 @@ public class MainApp
         return instance;
     }
 
-    public String getURLBollywoodActress(String nameOfPerson)
+    public String getURLBollywoodCelebrity(CelebrityData selectedCelebrity)
     {
         Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
                 + "::getURLBollywoodActress()");
 
         // | Covert the selected item to lowercase and replace spaces with _
-        String personNameLowerCase = nameOfPerson.toLowerCase();
+        String personNameLowerCase = selectedCelebrity.getName().toLowerCase();
         String personNameLowerCaseWithUnderscores = personNameLowerCase
                 .replace(" ", "_");
         Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
@@ -64,6 +62,9 @@ public class MainApp
         String url = PIC_URL.toString();
         url = url.replaceAll(TAG_DIR_PERSON_NAME,
                 personNameLowerCaseWithUnderscores);
+        url = url.replaceAll(TAG_DIR_CATAGORY,
+                selectedCelebrity.getCatagory().toLowerCase());
+        
         String num = CommonConstants.EMPTY_STRING;
         if (mCurrentPersonIndex < 10)
         {
@@ -94,9 +95,9 @@ public class MainApp
         // Add popup that application error, try again...
         // **** Current sending to About page but need to FIX.....
         Context context = mSplashActivity.getApplicationContext();
-        //Intent intent = new Intent(context, AboutUsActivity.class);
-        //MainApp.getInstance().getSplashActivity().startActivityForResult(
-        //        intent, 0);
+        // Intent intent = new Intent(context, AboutUsActivity.class);
+        // MainApp.getInstance().getSplashActivity().startActivityForResult(
+        // intent, 0);
 
         BaseAlertDialog alertDialog = new BaseAlertDialog(context);
         alertDialog.show();
@@ -280,7 +281,8 @@ public class MainApp
     }
 
     /**
-     * @param mCurrentNewsIndex the mCurrentNewsIndex to set
+     * @param mCurrentNewsIndex
+     *            the mCurrentNewsIndex to set
      */
     public void setCurrentNewsIndex(int mCurrentNewsIndex)
     {
@@ -293,6 +295,22 @@ public class MainApp
     public int getCurrentNewsIndex()
     {
         return mCurrentNewsIndex;
+    }
+
+    /**
+     * @param mCurrentSelectedCelebrity the mCurrentSelectedCelebrity to set
+     */
+    public void setCurrentSelectedCelebrity(CelebrityData mCurrentSelectedCelebrity)
+    {
+        this.mCurrentSelectedCelebrity = mCurrentSelectedCelebrity;
+    }
+
+    /**
+     * @return the mCurrentSelectedCelebrity
+     */
+    public CelebrityData getCurrentSelectedCelebrity()
+    {
+        return mCurrentSelectedCelebrity;
     }
 
     public void init()
@@ -376,18 +394,23 @@ public class MainApp
 
     private String mCurrentPersonName = CommonConstants.EMPTY_STRING;
     private long mCurrentPersonIndex = CommonConstants.DEFAULT_LONG;
-
-    private int mCurrentNewsIndex = CommonConstants.DEFAULT_INT;
+    private CelebrityData mCurrentSelectedCelebrity = null;
     
+    private int mCurrentNewsIndex = CommonConstants.DEFAULT_INT;
+
     private boolean mInited = false;
 
-    static String TAG_DIR_PERSON_NAME = "TAG_DIR_PERSON_NAME";
-    static String TAG_PERSON_NAME_ID = "TAG_PERSON_NAME_ID";
+    final static String TAG_DIR_PERSON_NAME = "TAG_DIR_PERSON_NAME";
+    final static String TAG_PERSON_NAME_ID = "TAG_PERSON_NAME_ID";
+    final static String TAG_DIR_CATAGORY = "TAG_DIR_CATAGORY";
 
-//    static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pics/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
-    static String PIC_URL = "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pictures/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+    // final static String PIC_URL =
+    // "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pics/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+    // final static String PIC_URL =
+    // "http://www.bollywoodmovies.us/actress/TAG_DIR_PERSON_NAME/pictures/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
+    final static String PIC_URL = "http://www.bollywoodmovies.us/TAG_DIR_CATAGORY/TAG_DIR_PERSON_NAME/pictures/TAG_DIR_PERSON_NAME_TAG_PERSON_NAME_ID.jpg";
 
     // TODO
     // Set flag to false before release and also remove some repeat logging
-    static boolean DEBUG = true;
+    final static boolean DEBUG = true;
 }
