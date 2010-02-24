@@ -26,6 +26,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -73,6 +74,7 @@ public class NewsListView extends ListActivity
                 mListOfNewsStr));
 
         getListView().setTextFilterEnabled(true);
+        //getListView().setDivider(R.drawable.appicon);
 
         Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + NewsListView.class
                 + "::onCreate()");

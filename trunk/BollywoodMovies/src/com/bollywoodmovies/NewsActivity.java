@@ -14,14 +14,13 @@
  * $Date$
  * $Id$
  * 
- ******************************************************************************/package com.bollywoodmovies;
+ ******************************************************************************/
+package com.bollywoodmovies;
 
 import com.util.CommonConstants;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
-
 
 public class NewsActivity extends BaseApplicationActivity
 {
