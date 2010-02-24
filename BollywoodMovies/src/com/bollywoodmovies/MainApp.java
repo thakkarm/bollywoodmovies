@@ -57,7 +57,7 @@ public class MainApp
                 .replace(" ", "_");
         Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
                 + personNameLowerCaseWithUnderscores + " ]");
-        Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentPersonIndex + " ]");
+        Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentImageShownNum + " ]");
 
         String url = PIC_URL.toString();
         url = url.replaceAll(TAG_DIR_PERSON_NAME,
@@ -66,12 +66,12 @@ public class MainApp
                 selectedCelebrity.getCatagory().toLowerCase());
         
         String num = CommonConstants.EMPTY_STRING;
-        if (mCurrentPersonIndex < 10)
+        if (mCurrentImageShownNum < 10)
         {
-            num = "0" + Long.toString(mCurrentPersonIndex);
+            num = "0" + Long.toString(mCurrentImageShownNum);
         } else
         {
-            num = Long.toString(mCurrentPersonIndex);
+            num = Long.toString(mCurrentImageShownNum);
         }
         url = url.replaceAll(TAG_PERSON_NAME_ID, num);
 
@@ -264,20 +264,20 @@ public class MainApp
     }
 
     /**
-     * @param mCurrentPersonIndex
-     *            the mCurrentPersonIndex to set
+     * @param currentImageShownNum
+     *            the currentImageShownNum to set
      */
-    public void setCurrentPersonIndex(long currentPersonIndex)
+    public void setCurrentImageShownNum(long currentImageShownNum)
     {
-        this.mCurrentPersonIndex = currentPersonIndex;
+        this.mCurrentImageShownNum = currentImageShownNum;
     }
 
     /**
      * @return the mCurrentPersonIndex
      */
-    public long getCurrentPersonIndex()
+    public long getCurrentImageShownNum()
     {
-        return mCurrentPersonIndex;
+        return mCurrentImageShownNum;
     }
 
     /**
@@ -325,7 +325,8 @@ public class MainApp
 
             Configuration config = Configuration.getInstance();
             config.loadCelebrityConfig();
-            config.loadNewsConfig();
+            // NOTE: News config being loaded on NewsButtonListener:onClick on 1st click
+            //config.loadNewsConfig();
             mInited = true;
         }
     }
@@ -393,7 +394,7 @@ public class MainApp
     private InputStream mLocalXml = null;
 
     private String mCurrentPersonName = CommonConstants.EMPTY_STRING;
-    private long mCurrentPersonIndex = CommonConstants.DEFAULT_LONG;
+    private long mCurrentImageShownNum = CommonConstants.DEFAULT_LONG;
     private CelebrityData mCurrentSelectedCelebrity = null;
     
     private int mCurrentNewsIndex = CommonConstants.DEFAULT_INT;

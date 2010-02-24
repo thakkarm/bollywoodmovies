@@ -124,12 +124,12 @@ public class Photo extends BaseApplicationActivity
         MainApp mainApp = MainApp.getInstance();
         CelebrityData currentCelebrity = mainApp.getCurrentSelectedCelebrity();
         
-        long currentPersonIndex = mainApp.getCurrentPersonIndex();
-        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonIndex + "]");
-        currentPersonIndex--;
-        if (currentPersonIndex <= 0)
+        long currentPersonImageIndex = mainApp.getCurrentImageShownNum();
+        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonImageIndex + "]");
+        currentPersonImageIndex--;
+        if (currentPersonImageIndex <= 0)
         {
-            currentPersonIndex = currentCelebrity.getNumOfPics();
+            currentPersonImageIndex = currentCelebrity.getNumOfPics();
         }
 
         String url = mainApp.getURLBollywoodCelebrity(currentCelebrity);
@@ -137,7 +137,7 @@ public class Photo extends BaseApplicationActivity
         ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
         this.showImage(url, imgView);
 
-        mainApp.setCurrentPersonIndex(currentPersonIndex);
+        mainApp.setCurrentImageShownNum(currentPersonImageIndex);
 
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::showPreviousImage()");
@@ -149,10 +149,10 @@ public class Photo extends BaseApplicationActivity
                 + "::showNextImage()");
 
         MainApp mainApp = MainApp.getInstance();
-        long currentPersonIndex = mainApp.getCurrentPersonIndex();
-        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonIndex + "]");
+        long currentPersonImageIndex = mainApp.getCurrentImageShownNum();
+        Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonImageIndex + "]");
 
-        currentPersonIndex++;
+        currentPersonImageIndex++;
         // Get the count from the configuration and compare against that
         Configuration config = Configuration.getInstance();
         CelebrityData celebrity = config.getCelebrityData(mainApp
@@ -163,11 +163,11 @@ public class Photo extends BaseApplicationActivity
             celebrityMaxPics = celebrity.getNumOfPics();
         }
         // Given that index is 0 based, we can show one more image
-        if (currentPersonIndex > celebrityMaxPics)
+        if (currentPersonImageIndex > celebrityMaxPics)
         {
-            currentPersonIndex = 1;
+            currentPersonImageIndex = 1;
         }
-        mainApp.setCurrentPersonIndex(currentPersonIndex);
+        mainApp.setCurrentImageShownNum(currentPersonImageIndex);
 
         String url = mainApp.getURLBollywoodCelebrity(mainApp.getCurrentSelectedCelebrity());
 
