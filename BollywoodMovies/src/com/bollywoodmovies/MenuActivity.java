@@ -17,15 +17,13 @@
  ******************************************************************************/
 package com.bollywoodmovies;
 
-import com.util.CommonConstants;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.util.CommonConstants;
 
 public class MenuActivity extends BaseApplicationActivity
 {

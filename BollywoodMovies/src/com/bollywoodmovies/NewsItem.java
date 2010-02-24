@@ -81,16 +81,16 @@ public class NewsItem extends BaseApplicationActivity
         
         NewsData selectedNewsItem = (NewsData) config.getNewsList().get(newsIndex);
         TextView newsDate = (TextView) findViewById(R.id.TextViewNewsDate);
-        newsDate.setText(selectedNewsItem.getDate());        
-        newsDate.setTextSize(20);
+        newsDate.setText(selectedNewsItem.getDate() + "\n--------------------");        
+        newsDate.setTextSize(10);
 
         TextView newsTitle = (TextView) findViewById(R.id.TextViewNewsTitle);
-        newsTitle.setText(selectedNewsItem.getTitle());        
-        newsTitle.setTextSize(20);
+        newsTitle.setText(selectedNewsItem.getTitle() + "\n---------------------------------------------------------------");        
+        newsTitle.setTextSize(15);
 
         TextView newsBody = (TextView) findViewById(R.id.TextViewNewsBody);
         newsBody.setText(selectedNewsItem.getBody());        
-        newsBody.setTextSize(25);
+        newsBody.setTextSize(20);
     }
 
     public void showPreviousNewsItem()
