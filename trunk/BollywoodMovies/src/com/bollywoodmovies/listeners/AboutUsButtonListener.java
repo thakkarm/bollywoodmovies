@@ -37,7 +37,14 @@ public class AboutUsButtonListener implements OnClickListener
 		if (null != view)
 		{
 			Intent intent = new Intent(view.getContext(), AboutUsActivity.class);
-			MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
+            if (null != MainApp.getInstance().getSplashActivity())
+            {                
+                MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
+            }
+            else
+            {
+                Log.e(CommonConstants.LOG_TAG, "getSplashActivity() returns null");
+            }
 		}
 		else
 		{
