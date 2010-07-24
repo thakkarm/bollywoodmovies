@@ -171,8 +171,11 @@ public class Photo extends BaseApplicationActivity
 
         String url = mainApp.getURLBollywoodCelebrity(mainApp.getCurrentSelectedCelebrity());
 
-        ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
-        this.showImage(url, imgView);
+        if (url.length() > 0)
+        {
+            ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
+            this.showImage(url, imgView);
+        }
 
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::showNextImage()");

@@ -81,6 +81,10 @@ public class MainApp
 
             Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");            
         }
+        else
+        {
+            Log.e(CommonConstants.LOG_TAG, "selectedCelebrity.getName() returns null");           
+        }
         
         Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
                 + "::getURLBollywoodActress()");
