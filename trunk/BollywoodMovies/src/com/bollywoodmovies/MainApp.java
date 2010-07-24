@@ -50,33 +50,38 @@ public class MainApp
     {
         Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MainApp.class
                 + "::getURLBollywoodActress()");
-
-        // | Covert the selected item to lowercase and replace spaces with _
-        String personNameLowerCase = selectedCelebrity.getName().toLowerCase();
-        String personNameLowerCaseWithUnderscores = personNameLowerCase
-                .replace(" ", "_");
-        Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
-                + personNameLowerCaseWithUnderscores + " ]");
-        Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentImageShownNum + " ]");
-
-        String url = PIC_URL.toString();
-        url = url.replaceAll(TAG_DIR_PERSON_NAME,
-                personNameLowerCaseWithUnderscores);
-        url = url.replaceAll(TAG_DIR_CATAGORY,
-                selectedCelebrity.getCatagory().toLowerCase());
         
-        String num = CommonConstants.EMPTY_STRING;
-        if (mCurrentImageShownNum < 10)
+        String url = CommonConstants.EMPTY_STRING;
+        
+        if (null != selectedCelebrity.getName())
         {
-            num = "0" + Long.toString(mCurrentImageShownNum);
-        } else
-        {
-            num = Long.toString(mCurrentImageShownNum);
+            // | Covert the selected item to lowercase and replace spaces with _
+            String personNameLowerCase = selectedCelebrity.getName().toLowerCase();
+            String personNameLowerCaseWithUnderscores = personNameLowerCase
+                    .replace(" ", "_");
+            Log.d(CommonConstants.LOG_TAG, "nameOfPerson Modified : [ "
+                    + personNameLowerCaseWithUnderscores + " ]");
+            Log.d(CommonConstants.LOG_TAG, "Num : [ " + mCurrentImageShownNum + " ]");
+
+            url = PIC_URL.toString();
+            url = url.replaceAll(TAG_DIR_PERSON_NAME,
+                    personNameLowerCaseWithUnderscores);
+            url = url.replaceAll(TAG_DIR_CATAGORY,
+                    selectedCelebrity.getCatagory().toLowerCase());
+            
+            String num = CommonConstants.EMPTY_STRING;
+            if (mCurrentImageShownNum < 10)
+            {
+                num = "0" + Long.toString(mCurrentImageShownNum);
+            } else
+            {
+                num = Long.toString(mCurrentImageShownNum);
+            }
+            url = url.replaceAll(TAG_PERSON_NAME_ID, num);
+
+            Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");            
         }
-        url = url.replaceAll(TAG_PERSON_NAME_ID, num);
-
-        Log.d(CommonConstants.LOG_TAG, "URL : [ " + url + " ]");
-
+        
         Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MainApp.class
                 + "::getURLBollywoodActress()");
         return url;
