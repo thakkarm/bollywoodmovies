@@ -28,7 +28,7 @@
 </LinearLayout>
 
 <LinearLayout android:id="@+id/LinearLayout03" android:layout_width="wrap_content" android:layout_height="wrap_content">
-<TextView android:text="@+id/TextViewNewsDate" android:id="@+id/TextViewNewsDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>
+<TextView android:text="@+id/TextViewNewsDate" android:id="@+id/TextViewNewsDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold" android:lineSpacingMultiplier="1"></TextView>
 </LinearLayout>
 
 <LinearLayout android:id="@+id/LinearLayout04" android:layout_width="wrap_content" android:layout_height="wrap_content">
