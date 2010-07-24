@@ -36,14 +36,19 @@ public class PhotoGalleryButtonListener implements OnClickListener
 
 		if (null != view)
 		{
-//			Intent intent = new Intent(view.getContext(), PhotoGalleryActivity.class);
-//			MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
 			Intent intent = new Intent(view.getContext(), PhotoListView.class);
-			MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
+            if (null != MainApp.getInstance().getSplashActivity())
+            {                
+                MainApp.getInstance().getSplashActivity().startActivityForResult(intent, 0);
+            }
+            else
+            {
+                Log.e(CommonConstants.LOG_TAG, "getSplashActivity() returns null");
+            }
 		}
 		else
 		{
-			Log.e(CommonConstants.LOG_TAG, "View is null");
+			Log.e(CommonConstants.LOG_TAG, "Vfsiew is null");
 		}
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + PhotoGalleryButtonListener.class + "::onClick()");
 	}
