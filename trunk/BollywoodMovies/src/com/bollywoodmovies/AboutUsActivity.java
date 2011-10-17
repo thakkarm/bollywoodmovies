@@ -73,7 +73,8 @@ public class AboutUsActivity extends BaseApplicationActivity
 				+ "::onStart()");
 		super.onStart();
 
-		MainApp.getInstance().init();
+		// 9/30/11 : Commmented out
+		// MainApp.getInstance().init();
 
 		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + AboutUsActivity.class
 				+ "::onStart()");

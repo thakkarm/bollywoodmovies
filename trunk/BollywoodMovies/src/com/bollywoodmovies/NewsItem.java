@@ -100,11 +100,12 @@ public class NewsItem extends BaseApplicationActivity
 
         MainApp mainApp = MainApp.getInstance();
         int currentNewsIndex = mainApp.getCurrentNewsIndex();
+        int newsListSize = Configuration.getInstance().getNewsListSize();
         Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentNewsIndex + "]");
         currentNewsIndex--;
         if (currentNewsIndex < 0)
         {
-            currentNewsIndex = 0;
+            currentNewsIndex = newsListSize - 1;
         }
         mainApp.setCurrentNewsIndex(currentNewsIndex);
 
