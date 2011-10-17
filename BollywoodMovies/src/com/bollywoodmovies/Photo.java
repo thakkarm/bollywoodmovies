@@ -16,7 +16,7 @@
  * 
  ******************************************************************************/
 package com.bollywoodmovies;
-
+import com.google.ads.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -94,10 +94,14 @@ public class Photo extends BaseApplicationActivity
         photoGalleryButton.setOnClickListener(MainApp.getInstance()
                 .getPhotoGalleryButtonListener());
 
-        TextView headerText = (TextView) findViewById(R.id.TextViewHeader);
+        // Look up the AdView as a resource and load a request.
+        AdView adView = (AdView)this.findViewById(R.id.adView);
+        adView.loadAd(new AdRequest());
+        
+//1        TextView headerText = (TextView) findViewById(R.id.adView);
         //leftSideText.setLines(23);
         //leftSideText.setWidth(20);
-        headerText.setText("                www.BollywoodMovies.us");
+//1        headerText.setText("                www.BollywoodMovies.us");
 //        leftSideText.setText("W\nW\nW\n.\nB\nO\nL\nL\nY\nW\nO\nO\nD\nM\nO\nV\nI\nE\nS\n.\nU\nS");
         
         mGestureDetector = new GestureDetector(this, new GestureListener());
@@ -115,7 +119,7 @@ public class Photo extends BaseApplicationActivity
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::onCreateOptionsMenu()");
     }
-
+    
     public void showPreviousImage()
     {
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
@@ -148,6 +152,9 @@ public class Photo extends BaseApplicationActivity
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + Photo.class
                 + "::showNextImage()");
 
+        // Disable the buttons
+        this.disableButtons();
+        
         MainApp mainApp = MainApp.getInstance();
         long currentPersonImageIndex = mainApp.getCurrentImageShownNum();
         Log.d(CommonConstants.LOG_TAG, "Current Index : [ " + currentPersonImageIndex + "]");
@@ -176,6 +183,9 @@ public class Photo extends BaseApplicationActivity
             ImageView imgView = (ImageView) findViewById(R.id.PhotoImageView);
             this.showImage(url, imgView);
         }
+
+        // Disable the buttons
+        this.enableButtons();
 
         Log.v(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + Photo.class
                 + "::showNextImage()");
@@ -284,7 +294,11 @@ public class Photo extends BaseApplicationActivity
             imageView.setImageDrawable(image);
         } else
         {
-            MainApp.getInstance().handleException(new NullPointerException());
+            Log.e(CommonConstants.LOG_TAG, "**** ********************************** *****");
+            Log.e(CommonConstants.LOG_TAG, "**** Null image for URL : [" + url + "] *****");
+            Log.e(CommonConstants.LOG_TAG, "**** ********************************** *****");
+            // MainApp.getInstance().handleException(new NullPointerException());
+            //TODO: Do not throw exception, have them retry it, it causes a crash need to investigate
         }
 
     }
@@ -314,5 +328,34 @@ public class Photo extends BaseApplicationActivity
         }
     };
 
+    private void disableButtons()
+    {
+        // | Get button from layout
+        Button prevButton = (Button) findViewById(R.id.ButtonPrev);
+        prevButton.setEnabled(false);
+        
+        // | Get button from layout
+        Button nextButton = (Button) findViewById(R.id.ButtonNext);
+        nextButton.setEnabled(false);
+
+        Button photoGalleryButton = (Button) findViewById(R.id.ButtonPhotoGallery);
+        photoGalleryButton.setEnabled(false);
+        
+    }
+
+    private void enableButtons()
+    {
+        // | Get button from layout
+        Button prevButton = (Button) findViewById(R.id.ButtonPrev);
+        prevButton.setEnabled(true);
+        
+        // | Get button from layout
+        Button nextButton = (Button) findViewById(R.id.ButtonNext);
+        nextButton.setEnabled(true);
+
+        Button photoGalleryButton = (Button) findViewById(R.id.ButtonPhotoGallery);
+        photoGalleryButton.setEnabled(true);
+        
+    }
 
 }

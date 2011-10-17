@@ -29,7 +29,9 @@ import com.bollywoodmovies.config.Configuration;
 import com.bollywoodmovies.listeners.AboutUsButtonListener;
 import com.bollywoodmovies.listeners.NewsButtonListener;
 import com.bollywoodmovies.listeners.PhotoGalleryButtonListener;
+import com.util.BaseException;
 import com.util.CommonConstants;
+import com.util.XMLFileLoaderException;
 
 public class MainApp
 {
@@ -322,7 +324,7 @@ public class MainApp
         return mCurrentSelectedCelebrity;
     }
 
-    public void init()
+    public void init() throws BaseException
     {
         if (mInited == false)
         {

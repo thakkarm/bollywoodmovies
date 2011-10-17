@@ -4,5 +4,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommonUtilities"/>
+	<classpathentry kind="lib" path="C:/01_Dev/dev_env/googleadmobadssdkandroid/GoogleAdMobAdsSdkAndroid-4.1.0/GoogleAdMobAdsSdk-4.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/acra-4.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

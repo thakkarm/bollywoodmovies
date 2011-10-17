@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:admobsdk="http://schemas.android.com/apk/res/com.bollywoodmovies"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
     <!-- Below can be put in the above to set the backgroud of the application -->
     <!-- android:background="@drawable/logo" -->
 <TextView  
@@ -17,14 +15,12 @@
 
 <!-- Ad Mob Layout -->
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<com.admob.android.ads.AdView  
-	        android:id="@+id/ad" 
-	        android:layout_width="fill_parent" 
-	        android:layout_height="wrap_content"
-	        admobsdk:backgroundColor="#000000"
-	        admobsdk:textColor="#FFFFFF"
-	        admobsdk:keywords="Android application"
-	/>
+  <com.google.ads.AdView android:id="@+id/adView"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         ads:adUnitId="a14b7caea59bc24"
+                         ads:adSize="BANNER"
+                         ads:loadAdOnCreate="true"/>
 </LinearLayout>	
 
 </LinearLayout>

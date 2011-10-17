@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.util.BaseException;
 import com.util.CommonConstants;
 
 public class MenuActivity extends BaseApplicationActivity
@@ -73,24 +74,26 @@ public class MenuActivity extends BaseApplicationActivity
 	@Override
 	public void onStart()
 	{
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MenuActivity.class
-				+ "::onStart()");
-		super.onStart();
-
-		//| Initilize the application
-        MainApp.getInstance().init();
-
-		// Display the logo
-		ImageView logoView = (ImageView) findViewById(R.id.LogoView);
-		logoView.setMaxHeight(300);
-		logoView.setMaxWidth(300);
-		logoView.setAdjustViewBounds(true);
-		logoView.setImageResource(R.drawable.logo);
-
-		MainApp.getInstance().init();
-
-		Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MenuActivity.class
-				+ "::onStart()");
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_IN + MenuActivity.class
+                + "::onStart()");
+        super.onStart();
+   
+        //| Initilize the application
+        // 9/30/11 : Commmented out added to MyApplication::oncreate
+        // MainApp.getInstance().init();
+   
+        // Display the logo
+        ImageView logoView = (ImageView) findViewById(R.id.LogoView);
+        logoView.setMaxHeight(300);
+        logoView.setMaxWidth(300);
+        logoView.setAdjustViewBounds(true);
+        logoView.setImageResource(R.drawable.logo);
+   
+   // 9/30/11 : Commented out, it is in here twice, calling just above?		
+   //		MainApp.getInstance().init();
+   
+        Log.i(CommonConstants.LOG_TAG, CommonConstants.LOG_OUT + MenuActivity.class
+        		+ "::onStart()");
 	}
 	
 }

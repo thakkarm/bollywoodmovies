@@ -58,7 +58,7 @@ public class Configuration
 		return instance;
 	}
 
-	public void loadCelebrityConfig()
+	public void loadCelebrityConfig() throws XMLFileLoaderException
 	{
 		// | Create celebrity config file reader handler
 		CelebrityConfigHandler celebrityConfigHandler = new CelebrityConfigHandler();
@@ -82,14 +82,15 @@ public class Configuration
         } catch (XMLFileLoaderException e)
         {
             e.printStackTrace();
-            MainApp.getInstance().handleException(e);
+            //MainApp.getInstance().handleException(e);
+            throw e;
         }
 
 	}
 
     public void loadNewsConfig()
     {
-        // | Create celebrity config file reader handler
+        // | Create news config file reader handler
         NewsConfigHandler newsConfigHandler = new NewsConfigHandler();
 
         XmlFileLoader xmlFileLoader = new XmlFileLoader();
