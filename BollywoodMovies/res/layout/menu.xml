@@ -18,8 +18,8 @@
 <Button android:text="@+id/ButtonPhotoGallery" android:id="@+id/ButtonPhotoGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/ButtonNews" android:id="@+id/ButtonNews" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="@+id/ButtonAboutUs" android:id="@+id/ButtonAboutUs" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-
 </LinearLayout>
+
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 <TextView android:text="@+id/TextViewFooterUrl" android:id="@+id/TextViewFooterUrl" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 </LinearLayout>
