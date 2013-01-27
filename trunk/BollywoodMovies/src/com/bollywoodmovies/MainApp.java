@@ -31,7 +31,6 @@ import com.bollywoodmovies.listeners.NewsButtonListener;
 import com.bollywoodmovies.listeners.PhotoGalleryButtonListener;
 import com.util.BaseException;
 import com.util.CommonConstants;
-import com.util.XMLFileLoaderException;
 
 public class MainApp
 {
